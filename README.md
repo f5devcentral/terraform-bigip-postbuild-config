@@ -61,3 +61,15 @@ module "postbuild-config-do" {
   trigger_on_payload = false
 }
 ```
+
+# Workflow of the module
+
+The module performs the following steps:
+
+1. Polls the target service until it's available
+2. Polls the target service until it's not in use  
+This step is to avoid first on-boarding race conditions
+3. Post the payload to the target service and evaluate the response
+4. Optionally, polls the target service for completion in case the initial response was "In Progress" (202)
+
+Steps 1., 2., and 4. will exit with an error code in case of a timeout without a positive response
