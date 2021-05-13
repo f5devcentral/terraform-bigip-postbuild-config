@@ -27,6 +27,12 @@ variable "wait_for_completion" {
   default     = true
 }
 
+variable "trigger_on_payload" {
+  type        = bool
+  description = "resend the payload if the payload content has changed since the last apply"
+  default     = true
+}
+
 resource "null_resource" "bigip_atc" {
   # this requires that the host executing Terraform
   # is able to communicate with the target BIG-IPs
@@ -129,7 +135,5 @@ resource "null_resource" "bigip_atc" {
         done        
         EOT
   }
-  triggers = {
-      declaration = var.bigip_atc_payload
-  }
+  triggers = var.trigger_on_payload ? { declaration = var.bigip_atc_payload } : {}
 }
