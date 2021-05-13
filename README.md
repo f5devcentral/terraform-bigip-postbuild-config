@@ -13,7 +13,7 @@ By using the submodules described below, the required inputs ```bigip_atc_endpoi
 ```hcl
 module "postbuild-config-do" {
   source           = "mjmenger/postbuild-config/bigip//do"
-  version          = "0.0.3"
+  version          = "0.1.0"
   bigip_user       = "admin"
   bigip_password   = "supersecretpassword"
   bigip_address    = "addressofbigip"
@@ -26,7 +26,7 @@ module "postbuild-config-do" {
 ```hcl
 module "postbuild-config-as3" {
   source            = "mjmenger/postbuild-config/bigip//as3"
-  version           = "0.0.3"
+  version           = "0.1.0"
   bigip_user        = "admin"
   bigip_password    = "supersecretpassword"
   bigip_address     = "addressofbigip"
@@ -40,7 +40,7 @@ module "postbuild-config-as3" {
 module "postbuild-config-do" {
   count            = var.bigip_count
   source           = "mjmenger/postbuild-config/bigip//do"
-  version          = "0.0.3"
+  version          = "0.1.0"
   bigip_user       = "admin"
   bigip_password   = "supersecretpassword"
   bigip_address    = var.listofbigipaddresses[count.index]
@@ -53,7 +53,7 @@ module "postbuild-config-do" {
 module "postbuild-config-do" {
   count              = var.bigip_count
   source             = "mjmenger/postbuild-config/bigip//do"
-  version            = "0.0.3"
+  version            = "0.1.0"
   bigip_user         = "admin"
   bigip_password     = "supersecretpassword"
   bigip_address      = var.listofbigipaddresses[count.index]
