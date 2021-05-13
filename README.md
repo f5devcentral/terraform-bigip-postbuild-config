@@ -10,12 +10,12 @@ For large scale or dynamically scaled BIG-IP deployments, the current BIG-IP pro
 
 ```hcl
 module "postbuild-config-do" {
-  source  = "mjmenger/postbuild-config/bigip//do"
-  version = "0.0.1"
-  bigip_user          = "admin"
-  bigip_password      = "supersecretpassword"
-  bigip_address       = "addressofbigip"
-  bigip_do_payload    = "dojsonpayload" 
+  source           = "mjmenger/postbuild-config/bigip//do"
+  version          = "0.0.1"
+  bigip_user       = "admin"
+  bigip_password   = "supersecretpassword"
+  bigip_address    = "addressofbigip"
+  bigip_do_payload = "dojsonpayload"
 }
 ```
 
@@ -23,11 +23,25 @@ module "postbuild-config-do" {
 
 ```hcl
 module "postbuild-config-as3" {
-  source  = "mjmenger/postbuild-config/bigip//as3"
-  version = "0.0.1"
-  bigip_user          = "admin"
-  bigip_password      = "supersecretpassword"
-  bigip_address       = "addressofbigip"
-  bigip_as3_payload    = "as3jsonpayload" 
+  source            = "mjmenger/postbuild-config/bigip//as3"
+  version           = "0.0.1"
+  bigip_user        = "admin"
+  bigip_password    = "supersecretpassword"
+  bigip_address     = "addressofbigip"
+  bigip_as3_payload = "as3jsonpayload"
+}
+```
+
+## Declarative On-boarding with arbitrary number of BIG-IPs
+
+```hcl
+module "postbuild-config-do" {
+  count            = var.bigip_count
+  source           = "mjmenger/postbuild-config/bigip//do"
+  version          = "0.0.1"
+  bigip_user       = "admin"
+  bigip_password   = "supersecretpassword"
+  bigip_address    = var.listofbigipaddresses[count.index]
+  bigip_do_payload = var.listofdopayload[count.index]
 }
 ```
