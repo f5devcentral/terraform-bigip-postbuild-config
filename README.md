@@ -1,6 +1,6 @@
 # terraform-bigip-postbuild-config
 
-For large scale or dynamically scaled BIG-IP deployments, the current BIG-IP provider is not an option for Application Services (AS3) and Declarative Onboarding (DO) calls. This module is a workaround to address the following use-cases:
+For large-scale or dynamically-scaled BIG-IP deployments, the current [BIG-IP provider](https://registry.terraform.io/providers/F5Networks/bigip/latest/docs) is not an option for [Application Services (AS3)](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/) and [Declarative Onboarding (DO)](https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/) calls. This module is a workaround to address the following use-cases:
 
 - Using Terraform to build and onboard more than one or two BIG-IPs simultaneously
 - Using Terraform to build, onboard, and operate a dynamically- and arbitrarily-sized cluster of BIG-IPs
@@ -13,7 +13,7 @@ By using the submodules described below, the required inputs ```bigip_atc_endpoi
 ```hcl
 module "postbuild-config-do" {
   source           = "mjmenger/postbuild-config/bigip//do"
-  version          = "0.0.1"
+  version          = "0.0.3"
   bigip_user       = "admin"
   bigip_password   = "supersecretpassword"
   bigip_address    = "addressofbigip"
@@ -26,7 +26,7 @@ module "postbuild-config-do" {
 ```hcl
 module "postbuild-config-as3" {
   source            = "mjmenger/postbuild-config/bigip//as3"
-  version           = "0.0.1"
+  version           = "0.0.3"
   bigip_user        = "admin"
   bigip_password    = "supersecretpassword"
   bigip_address     = "addressofbigip"
@@ -40,7 +40,7 @@ module "postbuild-config-as3" {
 module "postbuild-config-do" {
   count            = var.bigip_count
   source           = "mjmenger/postbuild-config/bigip//do"
-  version          = "0.0.1"
+  version          = "0.0.3"
   bigip_user       = "admin"
   bigip_password   = "supersecretpassword"
   bigip_address    = var.listofbigipaddresses[count.index]
@@ -53,7 +53,7 @@ module "postbuild-config-do" {
 module "postbuild-config-do" {
   count              = var.bigip_count
   source             = "mjmenger/postbuild-config/bigip//do"
-  version            = "0.0.1"
+  version            = "0.0.3"
   bigip_user         = "admin"
   bigip_password     = "supersecretpassword"
   bigip_address      = var.listofbigipaddresses[count.index]
