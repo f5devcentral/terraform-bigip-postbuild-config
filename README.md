@@ -6,6 +6,11 @@ For large-scale or dynamically-scaled BIG-IP deployments, the current [BIG-IP pr
 - Using Terraform to build, onboard, and operate a dynamically- and arbitrarily-sized cluster of BIG-IPs
 - Using Terraform to reconfig BIG-IPs after initial build and onboarding when operating parameters have changed
 
+# Prerequisites
+- Terraform host must be able to run a shell script 
+- curl must be installed on the Terraform host
+- The Terraform host must be able to access the management endpoint of the BIG-IPs to configure
+
 By using the submodules described below, the required inputs ```bigip_atc_endpoint ```, ```bigip_atc_payload ```, and ```bigip_atc_status_endpoint ``` are addressed with defaults.
 
 ## Simple Declarative On-boarding example

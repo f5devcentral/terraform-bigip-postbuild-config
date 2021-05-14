@@ -18,8 +18,16 @@ variable "bigip_atc_status_endpoint" {
   description = "atc endpoint for service status"
 }
 variable "initial_wait" {
-    description = "time to wait before probing endpoint"
-    default     = 30
+  description = "time to wait before probing endpoint"
+  default     = 30
+}
+variable "poll_interval" {
+  description = "time betweeen polling events"
+  default     = 40
+}
+variable "retry_limit" {
+  description = "maximum number of attempts before exiting"
+  default     = 10
 }
 variable "wait_for_completion" {
   type        = bool
@@ -42,7 +50,7 @@ resource "null_resource" "bigip_atc" {
         response=0
         retries=0
         echo "checking ATC service availability..."
-        while [ $response -ne 200 ] && [ $retries -lt 10 ]
+        while [ $response -ne 200 ] && [ $retries -lt ${var.retry_limit} ]
         do
             response=$(curl -kL -u "${var.bigip_user}:${var.bigip_password}" \
               --write-out '%%{http_code}' \
@@ -54,7 +62,7 @@ resource "null_resource" "bigip_atc" {
             if [ $response -eq 200 ]; then
               break 
             fi
-            sleep 40
+            sleep ${var.poll_interval}
         done
         if [ $response -ne 200 ]; then
           echo "ERROR: ATC SERVICE IS UNAVAILABLE"
@@ -62,9 +70,9 @@ resource "null_resource" "bigip_atc" {
         fi
         retries=0
         response=0
-        while [ $response -ne 200 ] && [ $retries -lt 10 ]
+        while [ $response -ne 200 ] && [ $retries -lt ${var.retry_limit} ]
         do
-            sleep 40
+            sleep ${var.poll_interval}
             response=$(curl -kL -u "${var.bigip_user}:${var.bigip_password}" \
               --write-out '%%{http_code}' \
               --silent \
@@ -106,9 +114,9 @@ resource "null_resource" "bigip_atc" {
               -d '${var.bigip_atc_payload}')
         echo "ATC payload status: $response"
         retries=0
-        while [ ${var.wait_for_completion ? 1 : 0} ] && [ $response -ne 200 ] && [ $retries -lt 10 ]
+        while [ ${var.wait_for_completion ? 1 : 0} ] && [ $response -ne 200 ] && [ $retries -lt ${var.retry_limit} ]
         do
-            sleep 40
+            sleep ${var.poll_interval}
             response=$(curl -kL -u "${var.bigip_user}:${var.bigip_password}" \
               --write-out '%%{http_code}' \
               --silent \
