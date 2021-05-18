@@ -52,7 +52,7 @@ locals {
     retry_limit = var.retry_limit,
     poll_interval = var.poll_interval,
     bigip_atc_payload = var.bigip_atc_payload,
-    wait_for_completion = var.wait_for_completion
+    wait_for_completion = var.wait_for_completion ? 1 : 0
   })
 }
 
