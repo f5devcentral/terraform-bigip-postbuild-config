@@ -52,7 +52,7 @@ if [ $response -ne 200 ]; then
     echo "ERROR: ATC SERVICE IS UNAVAILABLE"
     exit 255
 fi
-sleep ${var.initial_wait}
+sleep ${initial_wait}
 response=$(curl -s -k -X POST https://${bigip_address}${bigip_atc_endpoint} \
         -H 'Content-Type: application/json' \
         --write-out '%%{http_code}' \
