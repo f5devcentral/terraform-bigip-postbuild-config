@@ -41,107 +41,26 @@ variable "trigger_on_payload" {
   default     = true
 }
 
+locals {
+  atc_command = templatefile("${path.module}/atcscript.tmpl", {
+    initial_wait = var.initial_wait,
+    bigip_user = var.bigip_user,
+    bigip_password = var.bigip_password,
+    bigip_address = var.bigip_address,
+    bigip_atc_status_endpoint = var.bigip_atc_status_endpoint,
+    bigip_atc_endpoint = var.bigip_atc_endpoint,
+    retry_limit = var.retry_limit,
+    poll_interval = var.poll_interval,
+    bigip_atc_payload = var.bigip_atc_payload,
+    wait_for_completion = var.wait_for_completion
+  })
+}
+
 resource "null_resource" "bigip_atc" {
   # this requires that the host executing Terraform
   # is able to communicate with the target BIG-IPs
   provisioner "local-exec" {
-    command = <<-EOT
-        sleep ${var.initial_wait}
-        response=0
-        retries=0
-        echo "checking ATC service availability..."
-        while [ $response -ne 200 ] && [ $retries -lt ${var.retry_limit} ]
-        do
-            response=$(curl -kL -u "${var.bigip_user}:${var.bigip_password}" \
-              --write-out '%%{http_code}' \
-              --silent \
-              --output /dev/null \
-              https://${var.bigip_address}${var.bigip_atc_status_endpoint}) 
-            retries=$(($retries+1))
-            echo "ATC endpoint for service status: $response"
-            if [ $response -eq 200 ]; then
-              break 
-            fi
-            sleep ${var.poll_interval}
-        done
-        if [ $response -ne 200 ]; then
-          echo "ERROR: ATC SERVICE IS UNAVAILABLE"
-          exit 255
-        fi
-        retries=0
-        response=0
-        while [ $response -ne 200 ] && [ $retries -lt ${var.retry_limit} ]
-        do
-            sleep ${var.poll_interval}
-            response=$(curl -kL -u "${var.bigip_user}:${var.bigip_password}" \
-              --write-out '%%{http_code}' \
-              --silent \
-              --output /dev/null \
-              https://${var.bigip_address}${var.bigip_atc_endpoint}) 
-            retries=$(($retries+1))
-            echo "ATC endpoint service availability: $response"
-            case $response in
-              200)
-                echo "ATC service available for use"
-                break
-                ;;
-              202)
-                echo "ATC service in use"
-                ;;
-              4* | 5*)
-                echo "ATC service in failed state - this may be transient"
-                ;;
-              *)
-                echo "unexpected ATC service availability"
-                ;;
-            esac
-        done 
-        if [ $response -ne 200 ]; then
-          echo "ERROR: ATC SERVICE IS UNAVAILABLE"
-          exit 255
-        fi
-        sleep ${var.initial_wait}
-        response=$(curl -s -k -X POST https://${var.bigip_address}${var.bigip_atc_endpoint} \
-              -H 'Content-Type: application/json' \
-              --write-out '%%{http_code}' \
-              --silent \
-              --max-time 600 \
-              --retry 50 \
-              --retry-delay 15 \
-              --retry-max-time 600 \
-              --output /dev/null \
-              -u "${var.bigip_user}:${var.bigip_password}" \
-              -d '${var.bigip_atc_payload}')
-        echo "ATC payload status: $response"
-        retries=0
-        while [ ${var.wait_for_completion ? 1 : 0} ] && [ $response -ne 200 ] && [ $retries -lt ${var.retry_limit} ]
-        do
-            sleep ${var.poll_interval}
-            response=$(curl -kL -u "${var.bigip_user}:${var.bigip_password}" \
-              --write-out '%%{http_code}' \
-              --silent \
-              --output /dev/null \
-              https://${var.bigip_address}${var.bigip_atc_endpoint}) 
-            retries=$(($retries+1))
-            echo "ATC payload status: $response"
-            case $response in
-              200)
-                echo "payload applied"
-                break
-                ;;
-              202)
-                echo "payload in process"
-                ;;
-              4* | 5*)
-                echo "payload failed"
-                exit 255
-                ;;
-              *)
-                echo "unexpected response to payload"
-                ;;
-            esac
-        done        
-        EOT
+    command = local.atc_command
   }
   triggers = var.trigger_on_payload ? { declaration = var.bigip_atc_payload } : {}
 }
