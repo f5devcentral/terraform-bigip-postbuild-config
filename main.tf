@@ -42,7 +42,7 @@ variable "trigger_on_payload" {
 }
 
 locals {
-  atc_command = templatefile("${path.module}/atcscript.tmpl", {
+  atc_command = sensitive(templatefile("${path.module}/atcscript.tmpl", {
     initial_wait = var.initial_wait,
     bigip_user = var.bigip_user,
     bigip_password = var.bigip_password,
@@ -53,7 +53,7 @@ locals {
     poll_interval = var.poll_interval,
     bigip_atc_payload = var.bigip_atc_payload,
     wait_for_completion = (var.wait_for_completion ? 1 : 0)
-  })
+  }))
 }
 
 resource "null_resource" "bigip_atc" {
