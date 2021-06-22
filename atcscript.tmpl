@@ -90,11 +90,15 @@ do
         echo "payload in process"
         ;;
         4* | 5*)
-        echo "payload failed"
-        exit 255
+        echo "possible transient error"
         ;;
         *)
         echo "unexpected response to payload"
         ;;
     esac
 done  
+
+if [ $response -ne 200 ]; then
+    echo "ERROR: PAYLOAD FAILED: $response"
+    exit 255
+fi
