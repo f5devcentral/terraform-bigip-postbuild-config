@@ -40,6 +40,11 @@ do
         202)
         echo "ATC service in use"
         ;;
+        422)
+        echo "ATC service in failed state - likely from a previous run."
+        response=200
+        break
+        ;;
         4* | 5*)
         echo "ATC service in failed state - this may be transient"
         ;;
