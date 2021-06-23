@@ -71,7 +71,7 @@ response=$(curl -s -k -X POST https://${bigip_address}${bigip_atc_endpoint} \
         -d '${bigip_atc_payload}')
 echo "ATC payload status: $response"
 retries=0
-while [ ${wait_for_completion} -eq 1 ] && [ $response -ne 200 ] && [ $retries -lt ${retry_limit} ]
+while (( ${wait_for_completion} == 1 )) && [ $response -ne 200 ] && [ $retries -lt ${retry_limit} ]
 do
     sleep ${poll_interval}
     response=$(curl -kL -u "${bigip_user}:${bigip_password}" \
