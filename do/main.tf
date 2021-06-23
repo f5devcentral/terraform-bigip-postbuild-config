@@ -14,6 +14,16 @@ variable "initial_wait" {
     description = "time to wait before probing endpoint"
     default     = 30
 }
+variable "wait_for_completion" {
+  type        = bool
+  description = "in case of 202 response poll for 200 before completion"
+  default     = true
+}
+variable "trigger_on_payload" {
+  type        = bool
+  description = "resend the payload if the payload content has changed since the last apply"
+  default     = true
+}
 module "bigip_atc" {
     source                    = "../"
     bigip_user                = var.bigip_user
@@ -23,4 +33,6 @@ module "bigip_atc" {
     bigip_atc_endpoint        = "/mgmt/shared/declarative-onboarding"
     bigip_atc_status_endpoint = "/mgmt/shared/declarative-onboarding/info"
     initial_wait              = var.initial_wait
+    wait_for_completion       = var.wait_for_completion
+    trigger_on_payload        = var.trigger_on_payload
 }

@@ -62,6 +62,10 @@ resource "null_resource" "bigip_atc" {
   # is able to communicate with the target BIG-IPs
   provisioner "local-exec" {
     command = local.atc_command
+    interpreter = [
+      "/bin/bash",
+      "-c"
+    ]
   }
   triggers = var.trigger_on_payload ? { declaration = var.bigip_atc_payload } : {}
 }

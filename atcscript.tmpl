@@ -1,3 +1,5 @@
+#!/bin/bash
+
 sleep ${initial_wait}
 response=0
 retries=0
@@ -40,6 +42,11 @@ do
         202)
         echo "ATC service in use"
         ;;
+        422)
+        echo "ATC service in failed state - likely from a previous run."
+        response=200
+        break
+        ;;
         4* | 5*)
         echo "ATC service in failed state - this may be transient"
         ;;
@@ -65,8 +72,13 @@ response=$(curl -s -k -X POST https://${bigip_address}${bigip_atc_endpoint} \
         -u "${bigip_user}:${bigip_password}" \
         -d '${bigip_atc_payload}')
 echo "ATC payload status: $response"
+
+if (( ${wait_for_completion} == 0 )); then
+    exit 0
+fi
+
 retries=0
-while [ ${wait_for_completion} ] && [ $response -ne 200 ] && [ $retries -lt ${retry_limit} ]
+while [ $response -ne 200 ] && [ $retries -lt ${retry_limit} ]
 do
     sleep ${poll_interval}
     response=$(curl -kL -u "${bigip_user}:${bigip_password}" \
@@ -85,11 +97,15 @@ do
         echo "payload in process"
         ;;
         4* | 5*)
-        echo "payload failed"
-        exit 255
+        echo "possible transient error"
         ;;
         *)
         echo "unexpected response to payload"
         ;;
     esac
 done  
+
+if [ $response -ne 200 ]; then
+    echo "ERROR: PAYLOAD FAILED: $response"
+    exit 255
+fi
