@@ -3,7 +3,6 @@ variable "bigip_user" {
 }
 variable "bigip_password" {
     description = "password for BIG-IP account"
-    sensitive = true
 }
 variable "bigip_address" {
     description = "FQDN or ip address for BIG-IP"
