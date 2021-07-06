@@ -4,6 +4,9 @@ sleep ${initial_wait}
 response=0
 retries=0
 echo "checking ATC service availability..."
+# wait for the service to become available 
+# there may be some transient errors as the 
+# target service is installed and starts up
 while [ $response -ne 200 ] && [ $retries -lt ${retry_limit} ]
 do
     response=$(curl -kL -u "${bigip_user}:${bigip_password}" \
@@ -24,6 +27,13 @@ if [ $response -ne 200 ]; then
 fi
 retries=0
 response=0
+# checking that the service isn't in use by another
+# process
+# scenarios have been encountered when processes
+# started by cloud-init are using the services
+# and haven't completed yet
+# it's better to wait for the previous request to 
+# complete before submitting the next
 while [ $response -ne 200 ] && [ $retries -lt ${retry_limit} ]
 do
     sleep ${poll_interval}
@@ -60,6 +70,8 @@ if [ $response -ne 200 ]; then
     exit 255
 fi
 sleep ${initial_wait}
+# submit the request to the service which should
+# be available and unused
 response=$(curl -s -k -X POST https://${bigip_address}${bigip_atc_endpoint} \
         -H 'Content-Type: application/json' \
         --write-out '%%{http_code}' \
@@ -73,11 +85,17 @@ response=$(curl -s -k -X POST https://${bigip_address}${bigip_atc_endpoint} \
         -d '${bigip_atc_payload}')
 echo "ATC payload status: $response"
 
+# this returns a successful completion to Terraform
+# before the declaration completes. There is a risk
+# of a declaration failure occuring after Terraform
+# completes.
 if (( ${wait_for_completion} == 0 )); then
     exit 0
 fi
 
 retries=0
+# wait for the service to return a 200 response
+# indicating a successful handling of the declaration
 while [ $response -ne 200 ] && [ $retries -lt ${retry_limit} ]
 do
     sleep ${poll_interval}
