@@ -16,6 +16,10 @@ do
         https://${bigip_address}${bigip_atc_status_endpoint}) 
     retries=$(($retries+1))
     echo "ATC endpoint for service status: $response"
+    # accept a 204 response in lieu of a 200
+    if [ $response -eq 204 ]; then
+        response=200
+    fi
     if [ $response -eq 200 ]; then
         break 
     fi
@@ -113,6 +117,10 @@ do
         ;;
         202)
         echo "payload in process"
+        ;;
+        204)
+        echo "no content returned - success assumed"
+        response=200
         ;;
         4* | 5*)
         echo "possible transient error"
