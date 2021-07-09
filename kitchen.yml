@@ -1,0 +1,15 @@
+---
+driver:
+  name: terraform
+  root_module_directory: test/fixtures/wrapper
+  parallelism: 4
+
+provisioner:
+  name: terraform
+
+
+platforms:
+  - name: bigip
+
+suites:
+  - name: module_validate
