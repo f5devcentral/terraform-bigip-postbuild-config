@@ -25,7 +25,11 @@ platforms:
           controls:
             - bigip-connectivity
 
-
+  - name: azure
+    driver:
+      root_module_directory: test/fixtures/azure
+      variable_files:
+        - test/assets/azure.tfvars
 
 suites:
   - name: bigip
