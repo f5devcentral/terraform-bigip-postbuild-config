@@ -1,0 +1,7 @@
+name: bigip
+title: bigip Kitchen-Terraform
+version: 0.1.0
+depends:
+  - name: big-ip-atc-ready
+    git: https://github.com/F5SolutionsEngineering/big-ip-atc-ready
+    branch:  master

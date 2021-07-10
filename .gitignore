@@ -1,0 +1,6 @@
+.kitchen/**
+**/.terraform/**
+Gemfile.lock
+*terraform.lock.hcl
+*terraform.tfstate*
+**/.kitchen/logs/*.log

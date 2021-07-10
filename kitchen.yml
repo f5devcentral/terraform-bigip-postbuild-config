@@ -1,0 +1,31 @@
+---
+driver:
+  name: terraform
+  root_module_directory: test/fixtures/aws
+  parallelism: 4
+  command_timeout: 1200
+
+provisioner:
+  name: terraform
+
+verifier:
+  name: terraform
+
+platforms:
+  - name: aws
+    
+    driver:
+      root_module_directory: test/fixtures/aws
+      variable_files:
+        - test/assets/aws.tfvars
+    verifier:
+      systems:
+        - name: local
+          backend: local
+          controls:
+            - bigip-connectivity
+
+
+
+suites:
+  - name: bigip
