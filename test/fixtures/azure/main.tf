@@ -1,11 +1,15 @@
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
     #features{}
-    version = "~> 1.42"
+    
 }
 
 terraform {
-
+    required_providers {
+      azurerm = {
+        version = "~> 1.42" 
+      }
+    }
 }
 
 # Create a resource group if it doesn’t exist

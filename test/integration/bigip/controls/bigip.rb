@@ -7,7 +7,7 @@ require_controls 'big-ip-atc-ready' do
     control 'bigip-application-services-version'
     control 'bigip-telemetry-streaming'
     control 'bigip-telemetry-streaming-version'
-    control 'bigip-fast'
-    control 'bigip-fast-version'
+    #control 'bigip-fast'
+    #control 'bigip-fast-version'
     control 'bigip-licensed'
   end
