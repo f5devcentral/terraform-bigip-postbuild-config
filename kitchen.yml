@@ -26,6 +26,9 @@ platforms:
             - bigip-connectivity
 
   - name: azure
+    lifecycle:
+      post_converge:
+        - local: sleep 200
     driver:
       root_module_directory: test/fixtures/azure
       variable_files:
