@@ -28,7 +28,7 @@ platforms:
   - name: azure
     lifecycle:
       post_converge:
-        - local: sleep 200
+        - local: echo 'waiting 200 seconds for Azure to stabilize' && sleep 200
     driver:
       root_module_directory: test/fixtures/azure
       variable_files:
