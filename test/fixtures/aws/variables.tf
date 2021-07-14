@@ -53,3 +53,7 @@ variable "ec2_key_name" {
 variable "ec2_key_file" {
     default = "~/.ssh/id_rsa"
 }
+
+variable "nameserver" {
+  default = "8.8.8.8"
+}

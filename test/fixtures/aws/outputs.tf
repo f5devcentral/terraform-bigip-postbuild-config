@@ -41,3 +41,7 @@ output ts_version {
 output fast_version {
   value = "1.9.0"
 }
+
+output nameserver {
+  value = var.nameserver
+}

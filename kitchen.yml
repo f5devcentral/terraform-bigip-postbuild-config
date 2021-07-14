@@ -23,7 +23,10 @@ platforms:
         - name: local
           backend: local
           controls:
-            - bigip-connectivity
+            - bigip-postbuildconfig-do-self
+            - bigip-postbuildconfig-do-dns
+            - bigip-postbuildconfig-do-vlan
+            - bigip-postbuildconfig-do-provision
 
   - name: azure
     lifecycle:
@@ -38,7 +41,10 @@ platforms:
         - name: local
           backend: local
           controls:
-            - bigip-connectivity
+            - bigip-postbuildconfig-do-self
+            - bigip-postbuildconfig-do-dns
+            - bigip-postbuildconfig-do-vlan
+            - bigip-postbuildconfig-do-provision
 
 suites:
   - name: bigip
