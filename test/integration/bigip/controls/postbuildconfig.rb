@@ -4,6 +4,7 @@ BIGIP_HOST     = input('bigip_address')
 BIGIP_PORT     = input('bigip_port')
 BIGIP_USER     = input('user')
 BIGIP_PASSWORD = input('password')
+NAMESERVER     = input('nameserver')
 
 # compare the following tests to the 
 # declaration in assets/do.json
@@ -36,7 +37,7 @@ control "bigip-postbuildconfig-do-dns" do
               auth: {user: BIGIP_USER, pass: BIGIP_PASSWORD},
               method: 'GET',
               ssl_verify: false).body) do
-          its('nameServers') { should cmp "8.8.8.8" }
+          its('nameServers') { should cmp NAMESERVER }
     end
 end
 

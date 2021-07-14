@@ -78,3 +78,7 @@ variable onboard_log {
     type        = string
     default     = "/var/log/startup-script.log"
 }
+
+variable "nameserver" {
+  default = "8.8.8.8"
+}
