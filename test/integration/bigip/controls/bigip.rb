@@ -10,4 +10,4 @@ require_controls 'big-ip-atc-ready' do
     #control 'bigip-fast'
     #control 'bigip-fast-version'
     control 'bigip-licensed'
-  end
+end
