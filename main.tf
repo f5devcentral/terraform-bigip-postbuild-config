@@ -8,7 +8,7 @@ variable "bigip_address" {
     description = "FQDN or ip address for BIG-IP"
 }
 variable "bigip_atc_payload" {
-    description = "Declarative Onboarding (DO) JSON payload"
+    description = "BIG-IP Automation Toolchain JSON payload - Declarative Onboarding (DO), Application Services (AS3), or other as appropriate"
 }
 
 variable "bigip_atc_endpoint" {
