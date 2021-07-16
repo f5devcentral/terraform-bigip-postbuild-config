@@ -2,17 +2,16 @@ output "config" {
     value = data.azurerm_client_config.current
 }
 
-output "bigip_mgmt_public_ips" {
-    value = azurerm_public_ip.management_public_ip[*].ip_address
-}
+# output "bigip_mgmt_public_ips" {
+#     value = azurerm_public_ip.management_public_ip[*].ip_address
+# }
 
 output "bigip_mgmt_port" {
     value = "443"
 }
 
 output "bigip_password" {
-    value = random_password.password.result
-    sensitive = true
+    value = module.bigip[0].bigip_password
 }
 
 output "key_name" {
@@ -20,7 +19,7 @@ output "key_name" {
 }
 
 output bigip_address {
-  value = azurerm_public_ip.management_public_ip[0].ip_address
+  value = module.bigip[0].mgmtPublicIP
 }
 
 output bigip_port {
@@ -28,11 +27,11 @@ output bigip_port {
 }
 
 output user {
-  value = "admin"
+  value = module.bigip[0].f5_username
 }
 
 output password {
-  value     = random_password.password.result
+  value     = module.bigip[0].bigip_password
   sensitive = true
 }
 

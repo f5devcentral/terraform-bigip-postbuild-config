@@ -16,12 +16,16 @@ variable "allowed_mgmt_cidr" {
     default = "127.0.0.1/32"
 }
 
+variable "allowed_cidrs" {
+    default = ["127.0.0.1/32"]
+}
+
 variable "environment" {
-    default = "demo"
+    default = "kitchen-terraform"
 }
 
 variable "prefix" {
-    default = "mjmtfdemo"
+    default = "ktchntst"
 }
 
 variable "application_count" {

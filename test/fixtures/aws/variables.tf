@@ -1,5 +1,5 @@
 variable "prefix" {
-  default = "tf-aws-bigip"
+  default = "kitchen-terraform"
 }
 ## Europe Regions need oder Jumphost and BigIP Instance Typs1
 ## Uncomment needed region below
