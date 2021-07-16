@@ -1,20 +1,22 @@
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
-    #features{}
+    features{}
     
 }
+
+data "azurerm_client_config" "current" {}
 
 terraform {
     required_providers {
       azurerm = {
-        version = "~> 1.42" 
+        version = "> 2.28" 
       }
     }
 }
 
 # Create a resource group if it doesn’t exist
 resource "azurerm_resource_group" "main" {
-    name     = format("%s-resourcegroup-%s",var.prefix,random_id.randomId.hex)
+    name     = format("%s-resourcegroup-%s",var.prefix,random_id.id.hex)
     location = var.region
 
     tags = {
@@ -24,7 +26,7 @@ resource "azurerm_resource_group" "main" {
 
 # Create storage account for boot diagnostics
 resource "azurerm_storage_account" "mystorageaccount" {
-    name                        = format("%sdiagstorage%s",var.prefix,random_id.randomId.hex)
+    name                        = format("%sdiagstorage%s",var.prefix,random_id.id.hex)
     resource_group_name         = azurerm_resource_group.main.name
     location                    = azurerm_resource_group.main.location
     account_tier                = "Standard"
@@ -38,7 +40,7 @@ resource "azurerm_storage_account" "mystorageaccount" {
 
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "securitygroup" {
-    name                = format("%s-securitygroup-%s",var.prefix,random_id.randomId.hex)
+    name                = format("%s-securitygroup-%s",var.prefix,random_id.id.hex)
     location            = var.region
     resource_group_name = azurerm_resource_group.main.name
     
@@ -60,7 +62,7 @@ resource "azurerm_network_security_group" "securitygroup" {
 }
 
 # Generate random text for a unique storage account name
-resource "random_id" "randomId" {
+resource "random_id" "id" {
     # keepers = {
     #     # Generate a new ID only when a new resource group is defined
     #     resource_group = azurerm_resource_group.resourcegroup.name
