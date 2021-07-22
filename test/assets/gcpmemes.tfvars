@@ -6,3 +6,9 @@ allowed_cidrs     = ["67.168.239.254/32"]
 nameserver        = "8.8.8.8"
 project_id        = "f5-gcs-4261-sales-na-w"
 service_account   = "mengertf@f5-gcs-4261-sales-na-w.iam.gserviceaccount.com"
+
+
+
+
+zone               = "us-central1-a"
+admin_password_key = "bigip-admin-password-key"
