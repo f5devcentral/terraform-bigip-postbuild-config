@@ -122,6 +122,10 @@ do
         echo "no content returned - success assumed"
         response=200
         ;;
+        422)
+        echo "422 "
+        exit 255
+        ;;
         4* | 5*)
         echo "possible transient error"
         ;;
