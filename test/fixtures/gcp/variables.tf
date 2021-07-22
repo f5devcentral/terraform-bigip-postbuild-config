@@ -6,7 +6,7 @@ variable instance_count {
 variable prefix {
   description = "Prefix for resources created by this module"
   type        = string
-  default     = "tf-gcp-bigip"
+  default     = "ktchntest"
 }
 variable project_id {
   type        = string
@@ -30,4 +30,8 @@ variable image {
 variable service_account {
   description = "service account email to use with BIG-IP vms"
   type        = string
+}
+
+variable "nameserver" {
+  default = "8.8.8.8"
 }
