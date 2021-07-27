@@ -16,13 +16,17 @@ do
         https://${bigip_address}${bigip_atc_status_endpoint}) 
     retries=$(($retries+1))
     echo "ATC endpoint for service status: $response"
-    # accept a 204 response in lieu of a 200
-    if [ $response -eq 204 ]; then
+    case $response in
+        200)
+        echo "ATC endpoint is available"
+        break
+        ;;
+        204)
+        echo "ATC endpoint is available"
         response=200
-    fi
-    if [ $response -eq 200 ]; then
-        break 
-    fi
+        break
+        ;;        
+    esac
     sleep ${poll_interval}
 done
 if [ $response -ne 200 ]; then
@@ -56,6 +60,11 @@ do
         202)
         echo "ATC service in use"
         ;;
+        204)
+        echo "No content returned - assuming ATC service available for use"
+        response=200
+        break
+        ;;        
         422)
         echo "ATC service in failed state - likely from a previous run."
         response=200
