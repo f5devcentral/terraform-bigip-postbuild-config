@@ -37,8 +37,6 @@ platforms:
       root_module_directory: test/fixtures/aws
       variable_files:
         - test/assets/aws.tfvars
-    verifier:
-
 
   - name: azure
     lifecycle:
@@ -48,7 +46,6 @@ platforms:
       root_module_directory: test/fixtures/azure
       variable_files:
         - test/assets/azure.tfvars
-
 
 suites:
   - name: bigip
