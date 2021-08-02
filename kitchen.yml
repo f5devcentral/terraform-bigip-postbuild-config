@@ -10,6 +10,25 @@ provisioner:
 
 verifier:
   name: terraform
+  systems:
+    - name: local
+      backend: local
+      profile_locations:
+        - https://github.com/f5devcentral/big-ip-atc-ready.git
+        - test/integration/bigip
+      controls:
+        - bigip-connectivity
+        - bigip-postbuildconfig-do-self
+        - bigip-postbuildconfig-do-dns
+        - bigip-postbuildconfig-do-vlan
+        - bigip-postbuildconfig-do-provision
+        - bigip-declarative-onboarding
+        - bigip-declarative-onboarding-version
+        - bigip-application-services
+        - bigip-application-services-version
+        - bigip-telemetry-streaming
+        - bigip-telemetry-streaming-version
+        - bigip-licensed
 
 platforms:
   - name: aws
@@ -18,15 +37,6 @@ platforms:
       root_module_directory: test/fixtures/aws
       variable_files:
         - test/assets/aws.tfvars
-    verifier:
-      systems:
-        - name: local
-          backend: local
-          controls:
-            - bigip-postbuildconfig-do-self
-            - bigip-postbuildconfig-do-dns
-            - bigip-postbuildconfig-do-vlan
-            - bigip-postbuildconfig-do-provision
 
   - name: azure
     lifecycle:
@@ -36,15 +46,6 @@ platforms:
       root_module_directory: test/fixtures/azure
       variable_files:
         - test/assets/azure.tfvars
-    verifier:
-      systems:
-        - name: local
-          backend: local
-          controls:
-            - bigip-postbuildconfig-do-self
-            - bigip-postbuildconfig-do-dns
-            - bigip-postbuildconfig-do-vlan
-            - bigip-postbuildconfig-do-provision
 
 suites:
   - name: bigip

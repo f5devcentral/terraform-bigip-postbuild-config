@@ -4,7 +4,7 @@ For large-scale or dynamically-scaled BIG-IP deployments, the current [BIG-IP pr
 
 - Using Terraform to build and onboard more than one or two BIG-IPs simultaneously
 - Using Terraform to build, onboard, and operate a dynamically- and arbitrarily-sized cluster of BIG-IPs
-- Using Terraform to reconfig BIG-IPs after initial build and onboarding when operating parameters have changed
+- Using Terraform to reconfigure BIG-IPs after initial build and onboarding when source-controlled operating parameters have changed
 
 # Prerequisites
 - Terraform host must be able to run a shell script 
