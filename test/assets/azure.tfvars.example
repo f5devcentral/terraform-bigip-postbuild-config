@@ -1,0 +1,7 @@
+region            = "westus2"
+azs               = ["1"]
+publickeyfile     = "/path/to/mypublickeyfile"
+privatekeyfile    = "/path/to/myprivatekeyfile"
+allowed_mgmt_cidr = "127.0.0.1/32"
+allowed_cidrs     = ["127.0.0.1/32"]
+nameserver        = "168.63.129.16"
