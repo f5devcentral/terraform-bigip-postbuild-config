@@ -4,3 +4,5 @@ Gemfile.lock
 *terraform.lock.hcl
 *terraform.tfstate*
 **/.kitchen/logs/*.log
+*.tfvars
+test/assets/aws.tfvars

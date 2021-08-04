@@ -1,0 +1,6 @@
+region = "us-west-2"
+azs = ["us-west-2a","us-west-2b"]
+nameserver = "8.8.8.8"
+allowed_mgmt_cidr = ["0.0.0.0/0", "10.0.0.0/8"]
+ec2_key_name = "myec2keyname"
+ec2_key_file = "/path/to/myprivatekeyfile"

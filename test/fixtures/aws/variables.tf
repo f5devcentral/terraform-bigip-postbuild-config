@@ -27,7 +27,7 @@ variable "cidr" {
 
 variable "allowed_mgmt_cidr" {
   description = "list of source addresses allowed access to the BIG-IP management port"
-  default = ["50.126.126.219/32", "67.168.239.254/32", "10.0.0.0/8"]
+  default = ["0.0.0.0/0", "10.0.0.0/8"]
 }
 
 variable "allowed_app_cidr" {
@@ -47,11 +47,9 @@ variable "internal_subnet_offset" {
 }
 
 variable "ec2_key_name" {
-    default = "menger-dev"
 }
 
 variable "ec2_key_file" {
-    default = "~/.ssh/id_rsa"
 }
 
 variable "nameserver" {
