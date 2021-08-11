@@ -40,3 +40,19 @@ variable "trigger_on_payload" {
   description = "resend the payload if the payload content has changed since the last apply"
   default     = true
 }
+
+variable "shellscript" {
+  type        = bool
+  description = "upload and run a shell script"
+  default     = false
+}
+variable "additional_file_content" {
+  type        = string
+  description = "additional "
+  default     = ""
+}
+variable "additional_file_destination" {
+  type        = string
+  description = "additional file destination"
+  default     = ""
+}
