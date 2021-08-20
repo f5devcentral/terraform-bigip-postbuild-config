@@ -3,7 +3,7 @@ module "bigip" {
   count                      = 1
   prefix                     = format("%s-3nic", var.prefix)
   f5_ami_search_name         = "F5 BIGIP-15.* PAYG-Best 200Mbps*"
-  f5_password                = random_password.password.result
+  f5_password                = random_string.password.result
   ec2_key_name               = var.ec2_key_name
   mgmt_subnet_ids            = [{ "subnet_id" = module.vpc.database_subnets[count.index], "public_ip" = true, "private_ip_primary" = "", "private_ip_secondary" = "" }]
   mgmt_securitygroup_ids     = [module.bigip_mgmt_sg.this_security_group_id]

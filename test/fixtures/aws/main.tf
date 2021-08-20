@@ -11,9 +11,8 @@ resource "random_id" "id" {
 #
 # Create random password for BIG-IP
 #
-resource "random_password" "password" {
+resource "random_string" "password" {
   length           = 16
   special          = true
   override_special = "_%@"
 }
-
