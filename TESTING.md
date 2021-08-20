@@ -11,6 +11,10 @@ tested using
 - Setup AWS credentials using either the [Environment Variables approach](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication) or the [Credentials File approach](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#shared-credentials-file)
 - Setup Azure credentials using the [Azure CLI approach](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli). Note: The [other appraoches](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret) may work, I have not tried them.
 
+## Setup Terraform input
+- create ```aws.tfvars``` from [aws.tfvars.example](test/assets/aws.tfvars.example)
+- create ```azure.tfvars``` from [azure.tfvars.example](test/assets/aws.tfvars.example)
+
 ## First time through
 You should be good to go now.
 

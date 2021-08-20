@@ -5,7 +5,7 @@ output "bigip_mgmt_public_ips" {
 
 output "bigip_password" {
   description = "BIG-IP management password"
-  value       = random_password.password.result
+  value       = random_string.password.result
   sensitive   = true
 }
 
@@ -22,7 +22,7 @@ output user {
 }
 
 output password {
-  value     = random_password.password.result
+  value     = random_string.password.result
   sensitive = true
 }
 
