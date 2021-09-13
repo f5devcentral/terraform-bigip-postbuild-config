@@ -47,5 +47,12 @@ platforms:
       variable_files:
         - test/assets/azure.tfvars
 
+  - name: aws-tunnel
+    
+    driver:
+      root_module_directory: test/fixtures/aws_tunnel
+      variable_files:
+        - test/assets/aws.tfvars
+
 suites:
   - name: bigip
