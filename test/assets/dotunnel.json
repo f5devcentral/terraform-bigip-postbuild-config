@@ -50,20 +50,39 @@
         },
         "internal-self": {
             "class": "SelfIp",
-            "address": "10.30.0.10/24",
+            "address": "${internal_self}/24",
             "vlan": "internal",
+            "allowService": "default",
+            "trafficGroup": "traffic-group-local-only"
+        },
+        "tunnel-self": {
+            "class": "SelfIp",
+            "address": "${tunnel_overlay_address}/16",
+            "vlan": "newGRE",
             "allowService": "default",
             "trafficGroup": "traffic-group-local-only"
         },
         "external-self": {
             "class": "SelfIp",
-            "address": "10.20.0.9/24",
+            "address": "${external_self}/24",
             "vlan": "external",
             "allowService": [
                 "tcp:443"
             ],
             "trafficGroup": "traffic-group-local-only"
         },
+        "default": {
+            "class": "Route",
+            "gw": "${default_gateway_address}",
+            "network": "default",
+            "mtu": 9001
+        },
+        "internal-route": {
+            "class": "Route",
+            "gw": "${internal_gateway_address}",
+            "network": "10.0.0.0/8",
+            "mtu": 9001
+        },        
         "newGRE": {
             "class": "Tunnel",
             "tunnelType": "gre",
@@ -72,8 +91,8 @@
             "typeOfService": "preserve",
             "autoLastHop": "default",
             "key": 0,
-            "localAddress": "${tunnel_local_address}",
-            "remoteAddress": "${tunnel_remote_address}",
+            "localAddress": "${internal_self}",
+            "remoteAddress": "${internal_remote_self}",
             "secondaryAddress": "any6",
             "mode": "bidirectional",
             "transparent": false,
