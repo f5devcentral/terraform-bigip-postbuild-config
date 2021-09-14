@@ -27,7 +27,7 @@ output password {
 }
 
 output do_version {
-  value = "1.21.0"
+  value = "1.24.0"
 }
 
 output as3_version {
