@@ -67,9 +67,9 @@
         "newGRE": {
             "class": "Tunnel",
             "tunnelType": "gre",
-            "mtu": 2000,
-            "usePmtu": false,
-            "typeOfService": 125,
+            "mtu": 8951,
+            "usePmtu": true,
+            "typeOfService": "preserve",
             "autoLastHop": "default",
             "key": 0,
             "localAddress": "${tunnel_local_address}",
