@@ -80,7 +80,7 @@
         "internal-route": {
             "class": "Route",
             "gw": "${internal_gateway_address}",
-            "network": "10.0.0.0/8",
+            "network": "${network_cidr}",
             "mtu": 9001
         },        
         "newGRE": {

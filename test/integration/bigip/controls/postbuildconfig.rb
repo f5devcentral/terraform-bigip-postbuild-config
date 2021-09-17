@@ -5,6 +5,9 @@ BIGIP_PORT     = input('bigip_port')
 BIGIP_USER     = input('user')
 BIGIP_PASSWORD = input('password')
 NAMESERVER     = input('nameserver')
+EXTERNAL_SELF  = input('bigip_external_self')
+INTERNAL_SELF  = input('bigip_internal_self')
+
 
 # compare the following tests to the 
 # declaration in assets/do.json
@@ -16,7 +19,7 @@ control "bigip-postbuildconfig-do-self" do
               auth: {user: BIGIP_USER, pass: BIGIP_PASSWORD},
               method: 'GET',
               ssl_verify: false).body) do
-        its('address') { should cmp "10.20.0.9/24" }
+        its('address') { should cmp EXTERNAL_SELF }
         its('vlan') { should cmp "/Common/external" }
         its('allowService') { should cmp "tcp:443"}   
     end
@@ -24,7 +27,7 @@ control "bigip-postbuildconfig-do-self" do
         auth: {user: BIGIP_USER, pass: BIGIP_PASSWORD},
         method: 'GET',
         ssl_verify: false).body) do
-        its('address') { should cmp "10.30.0.10/24" }
+        its('address') { should cmp INTERNAL_SELF }
         its('vlan') { should cmp "/Common/internal" }
         its('allowService') { should cmp "default"}
     end

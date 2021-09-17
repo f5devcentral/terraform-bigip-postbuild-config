@@ -11,8 +11,9 @@ module "postbuild-config-do" {
         internal_remote_self     = module.bigip[count.index == 0 ? 1 : 0].private_addresses.internal_private.private_ip[0],
         external_self            = module.bigip[count.index].private_addresses.public_private.private_ip[0],
         tunnel_overlay_address   = cidrhost("192.168.100.0/16",10 + count.index),
-        default_gateway_address  = cidrhost(cidrsubnet("${module.bigip[count.index].private_addresses.public_private.private_ip[0]}/24",0,0),1)
-        internal_gateway_address = cidrhost(cidrsubnet("${module.bigip[count.index].private_addresses.internal_private.private_ip[0]}/24",0,0),1)
+        default_gateway_address  = cidrhost(cidrsubnet("${module.bigip[count.index].private_addresses.public_private.private_ip[0]}/24",0,0),1),
+        internal_gateway_address = cidrhost(cidrsubnet("${module.bigip[count.index].private_addresses.internal_private.private_ip[0]}/24",0,0),1),
+        network_cidr             = var.cidr
       }
   )
   depends_on = [

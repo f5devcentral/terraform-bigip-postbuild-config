@@ -10,25 +10,7 @@ provisioner:
 
 verifier:
   name: terraform
-  systems:
-    - name: local
-      backend: local
-      profile_locations:
-        - https://github.com/f5devcentral/big-ip-atc-ready.git
-        - test/integration/bigip
-      controls:
-        - bigip-postbuildconfig-do-self
-        - bigip-postbuildconfig-do-dns
-        - bigip-postbuildconfig-do-vlan
-        - bigip-postbuildconfig-do-provision
-        - bigip-connectivity        
-        - bigip-declarative-onboarding
-        - bigip-declarative-onboarding-version
-        - bigip-application-services
-        - bigip-application-services-version
-        - bigip-telemetry-streaming
-        - bigip-telemetry-streaming-version
-        - bigip-licensed
+
 
 platforms:
   - name: aws
@@ -54,5 +36,47 @@ platforms:
       variable_files:
         - test/assets/aws.tfvars
 
+
 suites:
   - name: bigip
+    excludes:
+      - aws-tunnel
+    verifier:
+      systems:
+      - name: local
+        backend: local
+        profile_locations:
+          - https://github.com/f5devcentral/big-ip-atc-ready.git
+          - test/integration/bigip
+        controls:
+          - bigip-postbuildconfig-do-self
+          - bigip-postbuildconfig-do-dns
+          - bigip-postbuildconfig-do-vlan
+          - bigip-postbuildconfig-do-provision
+          - bigip-connectivity        
+          - bigip-declarative-onboarding
+          - bigip-declarative-onboarding-version
+          - bigip-application-services
+          - bigip-application-services-version
+          - bigip-telemetry-streaming
+          - bigip-telemetry-streaming-version
+          - bigip-licensed
+
+  - name: bigip-tunnel
+    excludes:
+      - aws
+      - azure
+    verifier:
+      systems:
+      - name: remote
+        backend: ssh
+        profile_locations:
+          - test/integration/gre
+        controls:
+          - bigip-gre-ping
+        hosts_output: bigip_mgmt_public_ips
+        user: admin
+        key_files:
+          - test/fixtures/aws_tunnel/kitchen-terraform-kitchen-terraform-bigip-tunnel-aws-tunnel.pem
+        
+            

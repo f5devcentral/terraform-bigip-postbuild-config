@@ -1,0 +1,10 @@
+name: gre
+title: GRE tunnel validation
+maintainer: F5
+copyright: m.menger@f5.com
+copyright_email: m.menger@f5.com
+license: Apache-2.0
+summary: An InSpec Compliance Profile for GRE tunnels on BIG-IPs
+version: 0.1.0
+supports:
+  platform: os

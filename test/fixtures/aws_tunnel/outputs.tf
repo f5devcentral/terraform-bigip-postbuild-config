@@ -1,6 +1,6 @@
 output "bigip_mgmt_public_ips" {
   description = "Public IP addresses for the BIG-IP management interfaces"
-  value       = module.bigip[*].mgmtPublicIP 
+  value       = module.bigip[*].mgmtPublicIP[0] 
 }
 
 output "bigip_password" {
@@ -11,6 +11,16 @@ output "bigip_password" {
 
 output bigip_address {
   value = module.bigip[0].mgmtPublicIP[0]
+}
+output remote_gre_address {
+  value = "192.168.0.11"
+}
+
+output bigip_external_self {
+  value = "${module.bigip[0].private_addresses.public_private.private_ip[0]}/24"
+}
+output bigip_internal_self {
+  value = "${module.bigip[0].private_addresses.internal_private.private_ip[0]}/24"
 }
 
 output bigip_port {
