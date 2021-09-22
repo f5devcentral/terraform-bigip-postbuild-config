@@ -1,5 +1,5 @@
 module "bigip" {
-  source                     = "git::git@github.com:f5devcentral/terraform-aws-bigip-module.git?ref=v0.9.6"
+  source                     = "git::git@github.com:f5devcentral/terraform-aws-bigip-module.git?ref=v0.9.7"
   count                      = 1
   prefix                     = format("%s-3nic", var.prefix)
   f5_ami_search_name         = "F5 BIGIP-15.* PAYG-Best 200Mbps*"
@@ -12,5 +12,4 @@ module "bigip" {
   #external_alias_ip_count   = 2
   internal_subnet_ids        = [{ "subnet_id" = module.vpc.private_subnets[count.index], "public_ip" = false, "private_ip_primary" = "" }]
   internal_securitygroup_ids = [module.bigip_sg.this_security_group_id, module.bigip_mgmt_sg.this_security_group_id]
-  custom_user_data = ""
 }
