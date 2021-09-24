@@ -83,7 +83,7 @@
             "network": "${network_cidr}",
             "mtu": 9001
         },        
-        "newGRE": {
+        "${tunnel_name}": {
             "class": "Tunnel",
             "tunnelType": "gre",
             "mtu": 8951,

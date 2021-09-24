@@ -55,3 +55,7 @@ variable "ec2_key_file" {
 variable "nameserver" {
   default = "8.8.8.8"
 }
+
+variable "tunnel_name" {
+  default = "gre_tunnel"
+}

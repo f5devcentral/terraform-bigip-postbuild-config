@@ -7,6 +7,7 @@ module "postbuild-config-do" {
   bigip_do_payload = templatefile("${path.module}/../../assets/dotunnel.json",
       { 
         nameserver               = var.nameserver,
+        tunnel_name              = var.tunnel_name,
         internal_self            = module.bigip[count.index].private_addresses.internal_private.private_ip[0],
         internal_remote_self     = module.bigip[count.index == 0 ? 1 : 0].private_addresses.internal_private.private_ip[0],
         external_self            = module.bigip[count.index].private_addresses.public_private.private_ip[0],

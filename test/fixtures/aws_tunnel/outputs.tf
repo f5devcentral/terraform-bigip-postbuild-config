@@ -15,6 +15,9 @@ output bigip_address {
 output remote_gre_address {
   value = "192.168.0.11"
 }
+output gre_tunnel_name {
+  value = var.tunnel_name
+}
 
 output bigip_external_self {
   value = "${module.bigip[0].private_addresses.public_private.private_ip[0]}/24"
