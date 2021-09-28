@@ -58,7 +58,7 @@
         "tunnel-self": {
             "class": "SelfIp",
             "address": "${tunnel_overlay_address}/16",
-            "vlan": "newGRE",
+            "vlan": "${tunnel_name}",
             "allowService": "default",
             "trafficGroup": "traffic-group-local-only"
         },
