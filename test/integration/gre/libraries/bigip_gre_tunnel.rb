@@ -27,31 +27,36 @@ class GreTunnel < Inspec.resource(1)
     
     "
 
-    def initialize(tunnelname)
+    def initialize(tunnelname, remotehost)
       @tunnelname = tunnelname
+      @remotehost = remotehost
     end
 
     def type
       @command = inspec.command("tmsh list net tunnels tunnel #{@tunnelname} profile")
-      @command.stdout.scan(/profile ([a-z]+)/).first[0]
+      @command.stdout.scan(/net tunnels tunnel #{@tunnelname} {\n +profile (.+)\n}/)[0][0]
     end
 
     def tunneltraffic
+      # start a tcpdump on a thread to listen for the ping traffic
+      # that should go through the tunnel
       t1 = Thread.new{tcpdump()}
+      # start a thread to run ping which should be seen by the tcpdump thread
       t2 = Thread.new{pingpartner()}
       t2.join
       t1.join
-      #t1["stdout"].match('IP (\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}) > (\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}): ([a-zA-Z0-9]+), length \d{1,4}: IP (\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}) > (\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}): ([A-Z]+).{1,4}\d{1,4}: ([A-Z]+) ([A-Za-z 0-9]+), (.+$)')
-      @dumpresults = t1["stdout"].match('IP (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) > (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}): ([a-zA-Z0-9]+), length \d{1,4}: IP (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) > (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
-      @anotherdump = t1["stdout"].match(' lis=([a-zA-Z_\/]+)')
+
+      @traffic_data = t1["stdout"].match('IP (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) > (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}): ([a-zA-Z0-9]+), length \d{1,4}: IP (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) > (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
+      @listener_name = t1["stdout"].match(' lis=([a-zA-Z_\-\/]+)')
       @simplehash = {
-        "source_interface_address" => @dumpresults[1],
-        "destination_interface_address" => @dumpresults[2],
-        "source_tunnel_address" => @dumpresults[4],
-        "destination_tunnel_address" => @dumpresults[5],
-        "tunnel_protocol" => @dumpresults[3],
-        "tunnel_listener" => @anotherdump[1]
+        "source_interface_address" => @traffic_data[1],
+        "destination_interface_address" => @traffic_data[2],
+        "source_tunnel_address" => @traffic_data[4],
+        "destination_tunnel_address" => @traffic_data[5],
+        "tunnel_protocol" => @traffic_data[3],
+        "tunnel_listener" => @listener_name[1],
       }
+      Hashie::Mash.new @simplehash
     end
 
     def tcpdump
@@ -60,7 +65,7 @@ class GreTunnel < Inspec.resource(1)
     end
 
     def pingpartner
-      @command = inspec.command("ping 192.168.0.11 -c 2")
+      @command = inspec.command("ping #{@remotehost} -c 2")
       Thread.current["stdout"] = @command.stdout
     end
 

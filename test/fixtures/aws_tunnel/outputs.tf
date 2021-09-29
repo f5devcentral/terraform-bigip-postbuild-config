@@ -13,7 +13,7 @@ output bigip_address {
   value = module.bigip[0].mgmtPublicIP[0]
 }
 output remote_gre_address {
-  value = "192.168.0.11"
+  value = local.gre_remote_host
 }
 output gre_tunnel_name {
   value = var.tunnel_name

@@ -3,6 +3,10 @@
     "class": "Device",
     "async": true,
     "label": "Onboard BIG-IP",
+    "controls": {
+        "trace": true,
+        "traceResponse": true
+    },
     "Common": {
         "class": "Tenant",
         "myDns": {

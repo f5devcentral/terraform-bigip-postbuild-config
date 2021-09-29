@@ -39,12 +39,14 @@ ping ${cidrhost("192.168.100.0/16",10 + (count.index == 0 ? 1 : 0))} -c 1
     content = 321
   }
 }
-
+locals {  
+  gre_remote_host = "/tmp/gre-remote-host"
+}
 resource "null_resource" "gre_remote_host" {
   count = length(var.azs)
   provisioner "file" {
     content     = cidrhost("192.168.100.0/16",10 + (count.index == 0 ? 1 : 0))
-    destination = "/tmp/gre-remote-host"
+    destination = local.gre_remote_host
   }  
   connection {
     type        = "ssh"

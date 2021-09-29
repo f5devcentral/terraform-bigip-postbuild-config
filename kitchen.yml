@@ -73,7 +73,7 @@ suites:
         profile_locations:
           - test/integration/gre
         controls:
-          - bigip-gre-ping
+          - bigip-gre-tunnel
         hosts_output: bigip_mgmt_public_ips
         user: admin
         key_files:
