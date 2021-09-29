@@ -12,7 +12,7 @@ module "bigip" {
   #external_alias_ip_count   = 2
   internal_subnet_ids        = [{ "subnet_id" = module.vpc.private_subnets[count.index], "public_ip" = false, "private_ip_primary" = "" }]
   internal_securitygroup_ids = [module.bigip_sg.this_security_group_id, module.bigip_mgmt_sg.this_security_group_id]
-  DO_URL                     = "https://github.com/mjmenger/things/releases/download/do-1.24.0/f5-declarative-onboarding-1.24.0-5.noarch.rpm"
+  DO_URL                     = "https://github.com/F5Networks/f5-declarative-onboarding/releases/download/v1.24.0/f5-declarative-onboarding-1.24.0-6.noarch.rpm"
 }
 
 resource "null_resource" "testscript" {
@@ -25,6 +25,26 @@ tcpdump -i 0.0 -nnn proto GRE &
 ping ${cidrhost("192.168.100.0/16",10 + (count.index == 0 ? 1 : 0))} -c 1 
     EOT
     destination = "~/gretest.sh"
+  }  
+  connection {
+    type        = "ssh"
+    user        = "admin"
+    private_key = tls_private_key.keypair.private_key_pem
+    host        = module.bigip[count.index].mgmtPublicIP[0]
+  }
+  depends_on = [
+    module.postbuild-config-do
+  ]
+  triggers = {
+    content = 321
+  }
+}
+
+resource "null_resource" "gre_remote_host" {
+  count = length(var.azs)
+  provisioner "file" {
+    content     = cidrhost("192.168.100.0/16",10 + (count.index == 0 ? 1 : 0))
+    destination = "/tmp/gre-remote-host"
   }  
   connection {
     type        = "ssh"
