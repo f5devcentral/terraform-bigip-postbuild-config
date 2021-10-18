@@ -10,6 +10,6 @@ module bigip {
   external_securitygroup_ids = [module.external-network-security-group.network_security_group_id]
   internal_subnet_ids        = [{ "subnet_id" = data.azurerm_subnet.internal.id, "public_ip" = false, "private_ip_primary" = "" }]
   internal_securitygroup_ids = [module.internal-network-security-group.network_security_group_id]
-  availabilityZones          = var.azs
+  availabilityZones          = [var.azs[0]]
 }
 
