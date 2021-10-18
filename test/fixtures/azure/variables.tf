@@ -28,6 +28,11 @@ variable "prefix" {
     default = "ktchntst"
 }
 
+variable "tags" {
+  type    = map(string)
+  default = {}
+}
+
 variable "application_count" {
     default = 1
 }
@@ -86,3 +91,4 @@ variable onboard_log {
 variable "nameserver" {
   default = "8.8.8.8"
 }
+

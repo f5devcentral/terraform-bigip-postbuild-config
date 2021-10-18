@@ -70,3 +70,11 @@ resource "random_id" "id" {
     
     byte_length = 2
 }
+
+locals {
+    tags = merge(var.tags,{
+        Terraform   = "true"
+        Environment = var.environment
+      }
+    )
+}
