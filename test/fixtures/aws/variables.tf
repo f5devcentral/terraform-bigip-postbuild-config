@@ -1,6 +1,15 @@
 variable "prefix" {
   default = "kitchen-terraform"
 }
+
+variable "environment" {
+  type    = string
+  default = "test"
+}
+variable "tags" {
+  type    = map(string)
+  default = {}
+}
 ## Europe Regions need oder Jumphost and BigIP Instance Typs1
 ## Uncomment needed region below
 
