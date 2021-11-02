@@ -45,3 +45,19 @@ output fast_version {
 output nameserver {
   value = var.nameserver
 }
+
+output internal_selfip_address {
+  value = "10.30.0.10/24"
+}
+output external_selfip_address {
+  value = "10.20.0.9/24"
+}
+output mtu_size {
+  value = 1500 # specifically for GCP 1500 for AWS and Azure
+}
+output internal_vlan_tag {
+  value = "20"
+}
+output external_vlan_tag {
+  value = "10"
+}
