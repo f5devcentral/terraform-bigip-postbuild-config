@@ -1,5 +1,5 @@
 module "bigip" {
-  source                     = "git::git@github.com:f5devcentral/terraform-aws-bigip-module.git?ref=v0.9.4"
+  source                     = "git::git@github.com:f5devcentral/terraform-aws-bigip-module.git?ref=v0.9.7"
   count                      = 1
   prefix                     = format("%s-3nic", var.prefix)
   f5_ami_search_name         = "F5 BIGIP-15.* PAYG-Best 200Mbps*"
