@@ -27,19 +27,19 @@ output password {
 }
 
 output do_version {
-  value = "1.21.0"
+  value = var.do_version
 }
 
 output as3_version {
-  value = "3.28.0"
+  value = var.as3_version
 }
 
 output ts_version {
-  value = "1.20.0"
+  value = var.ts_version
 }
 
 output fast_version {
-  value = "1.9.0"
+  value = var.fast_version
 }
 
 output nameserver {
@@ -47,17 +47,17 @@ output nameserver {
 }
 
 output internal_selfip_address {
-  value = "10.30.0.10/24"
+  value = var.internal_selfip_address
 }
 output external_selfip_address {
-  value = "10.20.0.9/24"
+  value = var.external_selfip_address
 }
 output mtu_size {
-  value = 1500 # specifically for GCP 1500 for AWS and Azure
+  value = var.mtu_size # specifically for GCP 1500 for AWS and Azure
 }
 output internal_vlan_tag {
-  value = "20"
+  value = var.internal_vlan_tag
 }
 output external_vlan_tag {
-  value = "10"
+  value = var.external_vlan_tag
 }

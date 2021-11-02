@@ -3,7 +3,16 @@ module "postbuild-config-do" {
   bigip_user       = "admin"
   bigip_password   = random_string.password.result
   bigip_address    = module.bigip[0].mgmtPublicIP[0]
-  bigip_do_payload = templatefile("${path.module}/../../assets/do.json",{ nameserver = var.nameserver })
+  bigip_do_payload = templatefile("${path.module}/../../assets/do.json",
+  { 
+    nameserver              = var.nameserver
+    internal_selfip_address = var.internal_selfip_address
+    external_selfip_address = var.external_selfip_address
+    mtu_size                = var.mtu_size
+    internal_vlan_tag       = var.internal_vlan_tag
+    external_vlan_tag       = var.external_vlan_tag
+  }
+  )
   depends_on = [
     module.bigip
   ]
