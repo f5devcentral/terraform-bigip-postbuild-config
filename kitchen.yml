@@ -53,15 +53,7 @@ platforms:
       root_module_directory: test/fixtures/gcp
       variable_files:
         - test/assets/gcp.tfvars
-    verifier:
-      systems:
-        - name: local
-          backend: local
-          controls:
-            - bigip-postbuildconfig-do-self
-            - bigip-postbuildconfig-do-dns
-            - bigip-postbuildconfig-do-vlan
-            - bigip-postbuildconfig-do-provision
+
 
 suites:
   - name: bigip
