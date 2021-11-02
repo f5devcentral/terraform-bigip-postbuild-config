@@ -28,8 +28,8 @@
         },
         "external": {
             "class": "VLAN",
-            "tag": 10,
-            "mtu": 1500,
+            "tag": ${external_vlan_tag},
+            "mtu": ${mtu_size},
             "interfaces": [
                 {
                     "name": "1.1",
@@ -39,8 +39,8 @@
         },
         "internal": {
             "class": "VLAN",
-            "tag": 20,
-            "mtu": 1500,
+            "tag": ${internal_vlan_tag},
+            "mtu": ${mtu_size},
             "interfaces": [
                 {
                     "name": "1.2",
@@ -50,14 +50,14 @@
         },
         "internal-self": {
             "class": "SelfIp",
-            "address": "10.30.0.10/24",
+            "address": "${internal_selfip_address}",
             "vlan": "internal",
             "allowService": "default",
             "trafficGroup": "traffic-group-local-only"
         },
         "external-self": {
             "class": "SelfIp",
-            "address": "10.20.0.9/24",
+            "address": "${external_selfip_address}",
             "vlan": "external",
             "allowService": [
                 "tcp:443"
