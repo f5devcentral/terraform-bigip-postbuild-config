@@ -101,3 +101,9 @@ variable internal_vlan_tag {
 variable external_vlan_tag {
   default = "10"
 }
+variable internal_vlan_name {
+  default = "1.2"
+}
+variable external_vlan_name {
+  default = "1.1"
+}
