@@ -11,6 +11,8 @@ module "postbuild-config-do" {
     mtu_size                = var.mtu_size
     internal_vlan_tag       = var.internal_vlan_tag
     external_vlan_tag       = var.external_vlan_tag
+    internal_vlan_name      = var.internal_vlan_name
+    external_vlan_name      = var.external_vlan_name
   }
   )
   depends_on = [
