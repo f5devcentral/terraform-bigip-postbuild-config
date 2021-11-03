@@ -35,3 +35,25 @@ variable service_account {
 variable "nameserver" {
   default = "8.8.8.8"
 }
+
+variable internal_selfip_address {
+  default = "10.30.0.10/32"
+}
+variable external_selfip_address {
+  default = "10.20.0.9/32"
+}
+variable mtu_size {
+  default = 1460 
+}
+variable internal_vlan_tag {
+  default = "4093"
+}
+variable external_vlan_tag {
+  default = "4092"
+}
+variable internal_vlan_name {
+  default = "1.2"
+}
+variable external_vlan_name {
+  default = "1.0"
+}

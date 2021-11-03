@@ -58,17 +58,17 @@ output nameserver {
 }
 
 output internal_selfip_address {
-  value = "10.30.0.10/32"
+  value = var.internal_selfip_address
 }
 output external_selfip_address {
-  value = "10.20.0.9/32"
+  value = var.external_selfip_address
 }
 output mtu_size {
-  value = 1460 # specifically for GCP 1500 for AWS and Azure
+  value = var.mtu_size # specifically for GCP 1500 for AWS and Azure
 }
 output internal_vlan_tag {
-  value = "4093"
+  value = var.internal_vlan_tag
 }
 output external_vlan_tag {
-  value = "4092"
+  value = var.external_vlan_tag
 }
