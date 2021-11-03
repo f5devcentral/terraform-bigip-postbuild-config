@@ -32,7 +32,7 @@
             "mtu": ${mtu_size},
             "interfaces": [
                 {
-                    "name": "1.1",
+                    "name": "${external_vlan_name}",
                     "tagged": false
                 }
             ]
@@ -43,7 +43,7 @@
             "mtu": ${mtu_size},
             "interfaces": [
                 {
-                    "name": "1.2",
+                    "name": "${internal_vlan_name}",
                     "tagged": false
                 }
             ]
