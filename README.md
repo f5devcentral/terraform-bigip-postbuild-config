@@ -1,9 +1,11 @@
 # Usage
 
 ## Submodules for specific use-cases
-[AS3](as3/)
-[DO](dos/)
-[SH](sh/)
+| Name | source URL | Description |
+|------|-----|-------------|
+|[AS3](as3/)|https://github.com/mjmenger/terraform-bigip-postbuild-config//as3|addresses defaults required to send AS3 declarations|
+|[DO](dos/)|https://github.com/mjmenger/terraform-bigip-postbuild-config//do|addresses defaults required to send DO declarations|
+|[SH](sh/)|https://github.com/mjmenger/terraform-bigip-postbuild-config//sh|addresses defaults required to send and execute bash scripts|
 
 <!--- BEGIN_TF_DOCS --->
 ## Requirements
