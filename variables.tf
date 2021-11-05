@@ -3,7 +3,7 @@ variable "bigip_user" {
     type        = string
 }
 variable "bigip_password" {
-    description = "password of `bigip_user` account abc"
+    description = "password of `bigip_user` account"
     type        = string
 }
 variable "bigip_address" {
