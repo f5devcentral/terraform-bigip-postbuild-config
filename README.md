@@ -41,7 +41,7 @@ No modules.
 | <a name="input_bigip_atc_endpoint"></a> [bigip\_atc\_endpoint](#input\_bigip\_atc\_endpoint) | ATC endpoint to receive POSTs or GETs. The submodules (`//do` `//as3`) have these values defined. | `string` | n/a | yes |
 | <a name="input_bigip_atc_payload"></a> [bigip\_atc\_payload](#input\_bigip\_atc\_payload) | BIG-IP Automation Toolchain JSON payload - Declarative Onboarding (DO), Application Services (AS3), or other as appropriate | `string` | n/a | yes |
 | <a name="input_bigip_atc_status_endpoint"></a> [bigip\_atc\_status\_endpoint](#input\_bigip\_atc\_status\_endpoint) | ATC endpoint for checking the status of the service. The submodules (`//do` `//as3`) have these values defined. | `string` | n/a | yes |
-| <a name="input_bigip_password"></a> [bigip\_password](#input\_bigip\_password) | password of `bigip_user` account abc | `string` | n/a | yes |
+| <a name="input_bigip_password"></a> [bigip\_password](#input\_bigip\_password) | password of `bigip_user` account | `string` | n/a | yes |
 | <a name="input_bigip_user"></a> [bigip\_user](#input\_bigip\_user) | account to use with the BIG-IP | `string` | n/a | yes |
 | <a name="input_initial_wait"></a> [initial\_wait](#input\_initial\_wait) | time to wait before polling endpoint | `number` | `30` | no |
 | <a name="input_poll_interval"></a> [poll\_interval](#input\_poll\_interval) | time between polling events | `number` | `40` | no |
