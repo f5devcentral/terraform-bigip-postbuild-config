@@ -1,6 +1,11 @@
 name: Generate terraform docs
 on:
-  - pull_request
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
 
 jobs:
   docs:
