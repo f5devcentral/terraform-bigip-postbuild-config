@@ -1,5 +1,10 @@
 # Usage
 
+## Submodules for specific use-cases
+[AS3](as3/)
+[DO](dos/)
+[SH](sh/)
+
 <!--- BEGIN_TF_DOCS --->
 ## Requirements
 
