@@ -1,8 +1,14 @@
 .kitchen/**
+**/.kitchen/logs/*.log
+
 **/.terraform/**
-Gemfile.lock
 *terraform.lock.hcl
 *terraform.tfstate*
-**/.kitchen/logs/*.log
 *.tfvars
 test/assets/*.tfvars
+
+Gemfile.lock
+
+.env
+*.http
+
