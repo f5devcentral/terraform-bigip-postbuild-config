@@ -35,6 +35,12 @@ platforms:
       root_module_directory: test/fixtures/aws_tunnel
       variable_files:
         - test/assets/aws.tfvars
+  - name: gcp
+
+    driver:
+      root_module_directory: test/fixtures/gcp
+      variable_files:
+        - test/assets/gcp.tfvars
 
 
 suites:
