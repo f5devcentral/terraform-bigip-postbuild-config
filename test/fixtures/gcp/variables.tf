@@ -58,3 +58,8 @@ variable internal_vlan_name {
 variable external_vlan_name {
   default = "1.0"
 }
+
+variable provision {
+  default = ["ltm"]
+  type    = list(string)
+}
