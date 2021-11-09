@@ -53,7 +53,8 @@ variable "ec2_key_file" {
 }
 
 variable "nameserver" {
-  default = "8.8.8.8"
+  default = ["8.8.8.8"]
+  type    = list(string)
 }
 variable do_version {
   default = "1.21.0"

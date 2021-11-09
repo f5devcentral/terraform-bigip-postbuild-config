@@ -33,7 +33,8 @@ variable service_account {
 }
 
 variable "nameserver" {
-  default = "8.8.8.8"
+  default = ["8.8.8.8"]
+  type    = list(string)
 }
 
 variable internal_selfip_address {

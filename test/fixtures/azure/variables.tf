@@ -84,7 +84,8 @@ variable onboard_log {
 }
 
 variable "nameserver" {
-  default = "8.8.8.8"
+  default = ["8.8.8.8"]
+  type = list(string)
 }
 variable internal_selfip_address {
   default = "10.30.0.10/24"
