@@ -13,6 +13,7 @@ module "postbuild-config-do" {
     external_vlan_tag       = var.external_vlan_tag
     internal_vlan_name      = var.internal_vlan_name
     external_vlan_name      = var.external_vlan_name
+    provision               = var.provision
   }
   )
   depends_on = [

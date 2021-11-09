@@ -20,9 +20,10 @@
             "timezone": "UTC"
         },
         "myProvisioning": {
-            "class": "Provision",
-            "ltm": "nominal",
-            "asm": "nominal"
+            %{ for service in provision }
+            "${service}": "nominal",
+            %{ endfor }
+            "class": "Provision"
         },
         "external": {
             "class": "VLAN",
