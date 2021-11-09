@@ -62,7 +62,3 @@ output nameserver {
 output private_addresses {
   value = module.bigip[*].private_addresses.internal_private.private_ip[0]
 }
-
-output declarations {
-  value = module.postbuild-config-do[*].payload
-}
