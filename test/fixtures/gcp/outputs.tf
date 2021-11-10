@@ -1,21 +1,31 @@
-output "bigip_mgmt_port" {
-    value = "443"
+output bigip_password {
+  value = module.bigip.*.bigip_password
 }
-
-output "bigip_password" {
-    value = module.bigip[0].bigip_password
-}
-
-output "key_name" {
-    value = var.privatekeyfile
-}
-
-output bigip_address {
+output mgmtPublicIP {
   value = module.bigip[0].mgmtPublicIP
 }
 
+output bigip_username {
+  value = module.bigip.*.f5_username
+}
+output mgmtPort {
+  value = module.bigip.*.mgmtPort
+}
+
+output public_addresses {
+  value = module.bigip.*.public_addresses
+}
+output private_addresses {
+  value = module.bigip.*.private_addresses
+}
+output service_account {
+  value = module.bigip.*.service_account
+}
 output bigip_port {
-  value = 443
+  value = module.bigip[0].mgmtPort
+}
+output bigip_address {
+  value = module.bigip[0].mgmtPublicIP
 }
 
 output user {
@@ -28,7 +38,7 @@ output password {
 }
 
 output do_version {
-  value = "1.21.0"
+  value = "1.25.0"
 }
 
 output as3_version {

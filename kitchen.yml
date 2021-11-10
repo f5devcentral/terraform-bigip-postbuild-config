@@ -47,5 +47,13 @@ platforms:
       variable_files:
         - test/assets/azure.tfvars
 
+  - name: gcp
+
+    driver:
+      root_module_directory: test/fixtures/gcp
+      variable_files:
+        - test/assets/gcp.tfvars
+
+
 suites:
   - name: bigip

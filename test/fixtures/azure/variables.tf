@@ -97,6 +97,32 @@ variable onboard_log {
 }
 
 variable "nameserver" {
-  default = "8.8.8.8"
+  default = ["8.8.8.8"]
+  type = list(string)
+}
+variable internal_selfip_address {
+  default = "10.30.0.10/24"
+}
+variable external_selfip_address {
+  default = "10.20.0.9/24"
+}
+variable mtu_size {
+  default = 1500 
+}
+variable internal_vlan_tag {
+  default = "20"
+}
+variable external_vlan_tag {
+  default = "10"
+}
+variable internal_vlan_name {
+  default = "1.2"
+}
+variable external_vlan_name {
+  default = "1.1"
 }
 
+variable provision {
+  default = ["ltm"]
+  type    = list(string)
+}
