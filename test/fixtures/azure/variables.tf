@@ -1,3 +1,11 @@
+locals {
+    tags = merge(var.tags,{
+        Terraform   = "true"
+        Environment = var.environment
+      }
+    )
+}
+
 # must select a region that supports availability zones
 # https://docs.microsoft.com/en-us/azure/availability-zones/az-overview
 variable "region" {
@@ -26,6 +34,11 @@ variable "environment" {
 
 variable "prefix" {
     default = "ktchntst"
+}
+
+variable "tags" {
+  type    = map(string)
+  default = {}
 }
 
 variable "application_count" {
