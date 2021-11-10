@@ -1,3 +1,11 @@
+locals {
+    tags = merge(var.tags,{
+        Terraform   = "true"
+        Environment = var.environment
+      }
+    )
+}
+
 variable "prefix" {
   default = "kitchen-terraform"
 }
