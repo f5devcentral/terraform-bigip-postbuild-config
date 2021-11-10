@@ -1,0 +1,8 @@
+region            = "us-central1"
+azs               = ["1"]
+publickeyfile     = "path/to/publickeyfile"
+allowed_mgmt_cidr = "0.0.0.0/0"
+allowed_cidrs     = ["0.0.0.0/0"]
+nameserver        = ["8.8.8.8"]
+project_id        = "mygcpproject"
+service_account   = "mygcpserviceaccount"
