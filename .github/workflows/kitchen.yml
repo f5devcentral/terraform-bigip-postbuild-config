@@ -5,14 +5,14 @@ on:
       - kitchen
 
 jobs:
-  docs:
+  kitchen:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.ref }}
 
-    - name: Render terraform docs and push changes back to PR
+    - name: run kitchen command
       uses: lzysh/github-kitchen-terraform-action@v1.0.0
       with:
-        kitchen-command: "help"
+        kitchen-command: "converge aws"
