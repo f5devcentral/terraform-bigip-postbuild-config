@@ -5,7 +5,7 @@ on:
       - kitchen
 
 jobs:
-  kitchen:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: hashicorp/setup-terraform@v1.2.1
@@ -16,7 +16,10 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.ref }}
 
-    - name: run kitchen command
-      uses: lzysh/github-kitchen-terraform-action@v1.0.0
+    - name: DWP Kitchen Terraform
+      uses: dwp/github-action-kitchen-terraform@0.14.7
       with:
-        kitchen-command: "converge aws"
+        kitchen-command: "test aws"
+
+
+
