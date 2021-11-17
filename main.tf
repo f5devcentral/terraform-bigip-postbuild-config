@@ -26,7 +26,7 @@ resource "null_resource" "bigip_atc" {
       "-c"
     ]
   }
-  triggers = var.trigger_on_payload ? { declaration = var.bigip_atc_payload } : {}
+  triggers = var.trigger_on_payload ? { declaration = base64sha256(var.bigip_atc_payload) } : {}
 }
 
 resource "null_resource" "bigip_atc_wait" {
