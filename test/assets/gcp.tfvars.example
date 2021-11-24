@@ -6,3 +6,5 @@ allowed_cidrs     = ["0.0.0.0/0"]
 nameserver        = ["8.8.8.8"]
 project_id        = "mygcpproject"
 service_account   = "mygcpserviceaccount"
+tags              = { atag = "avalue", builtwith = "kitchen-terraform" }
+provision         = [ "ltm" ]
