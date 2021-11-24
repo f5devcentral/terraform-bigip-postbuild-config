@@ -1,4 +1,34 @@
 # Usage
+This module uses remote-exec on the BIG-IP. For this to work the admin user (or whatever user with which we're connecting to the BIG-IP) must have its default shell set to ```bash``` rather than ```tmsh```. This can be accomplished by sending a Declarative Onboarding declaration, including account configuration, before the shell script with an appropriate ```depends_on``` stanza.
+
+For example,
+```hcl
+module "postbuild-config-do" {
+  source           = "mjmenger/postbuild-config//do"
+  version          = "0.5.1"
+  bigip_user       = module.bigip[0].f5_username
+  bigip_password   = module.bigip[0].bigip_password
+  bigip_address    = module.bigip[0].mgmtPublicIP
+  bigip_do_payload = var.dopayload
+  depends_on = [
+    module.bigip
+  ]
+}
+
+module "postbuild-config-sh" {
+  source              = "mjmenger/postbuild-config//sh"
+  version             = "0.5.1"
+  bigip_user          = module.bigip[0].f5_username
+  bigip_password      = module.bigip[0].bigip_password
+  bigip_address       = module.bigip[0].mgmtPublicIP
+  bigip_shell_payload = var.shellscriptcontent
+  depends_on = [
+    module.postbuild-config-do
+  ]
+}
+
+```
+
 
 <!--- BEGIN_TF_DOCS --->
 ## Requirements
