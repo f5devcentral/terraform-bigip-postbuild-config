@@ -1,7 +1,17 @@
 # Usage
 This module uses remote-exec on the BIG-IP. For this to work the admin user (or whatever user with which we're connecting to the BIG-IP) must have its default shell set to ```bash``` rather than ```tmsh```. If you use one of F5's BIG-IP provisioning modules, the default shell is set for you. Otherwise, this can be accomplished by sending a Declarative Onboarding declaration, including account configuration, before the shell script with an appropriate ```depends_on``` stanza.
 
-For example,
+For example, this stanza sets the admin user's default shell to bash. There is [a more detailed example](https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/declarations/basic.html#user-class) on [F5's Cloud Docs](clouddocs.f5.com).
+```json
+  "admin": {
+      "class": "User",
+      "userType": "regular",
+      "password": "asdfjkl",
+      "shell": "bash"
+  },
+
+```
+
 ```hcl
 module "postbuild-config-do" {
   source           = "mjmenger/postbuild-config//do"
