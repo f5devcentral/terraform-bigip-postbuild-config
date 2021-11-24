@@ -1,5 +1,5 @@
 # Usage
-This module uses remote-exec on the BIG-IP. For this to work the admin user (or whatever user with which we're connecting to the BIG-IP) must have its default shell set to ```bash``` rather than ```tmsh```. This can be accomplished by sending a Declarative Onboarding declaration, including account configuration, before the shell script with an appropriate ```depends_on``` stanza.
+This module uses remote-exec on the BIG-IP. For this to work the admin user (or whatever user with which we're connecting to the BIG-IP) must have its default shell set to ```bash``` rather than ```tmsh```. If you use one of F5's BIG-IP provisioning modules, the default shell is set for you. Otherwise, this can be accomplished by sending a Declarative Onboarding declaration, including account configuration, before the shell script with an appropriate ```depends_on``` stanza.
 
 For example,
 ```hcl
