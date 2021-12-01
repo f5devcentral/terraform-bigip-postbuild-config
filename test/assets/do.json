@@ -7,9 +7,7 @@
         "class": "Tenant",
         "myDns": {
             "class": "DNS",
-            "nameServers": [
-                "${nameserver}"
-            ],
+            "nameServers": ${jsonencode(nameserver)},
             "search": [
                 "f5.com"
             ]
@@ -22,14 +20,15 @@
             "timezone": "UTC"
         },
         "myProvisioning": {
-            "class": "Provision",
-            "ltm": "nominal",
-            "asm": "nominal"
+            %{ for service in provision }
+            "${service}": "nominal",
+            %{ endfor }
+            "class": "Provision"
         },
         "external": {
             "class": "VLAN",
-            "tag": ${external_vlan_tag},
-            "mtu": ${mtu_size},
+            "tag": "${external_vlan_tag}",
+            "mtu": "${mtu_size}",
             "interfaces": [
                 {
                     "name": "${external_vlan_name}",
@@ -39,8 +38,8 @@
         },
         "internal": {
             "class": "VLAN",
-            "tag": ${internal_vlan_tag},
-            "mtu": ${mtu_size},
+            "tag": "${internal_vlan_tag}",
+            "mtu": "${mtu_size}",
             "interfaces": [
                 {
                     "name": "${internal_vlan_name}",

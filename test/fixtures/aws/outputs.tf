@@ -10,7 +10,7 @@ output "bigip_password" {
 }
 
 output bigip_address {
-  value = module.bigip[0].mgmtPublicIP[0]
+  value = module.bigip[0].mgmtPublicIP
 }
 
 output bigip_port {

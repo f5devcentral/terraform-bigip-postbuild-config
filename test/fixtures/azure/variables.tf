@@ -1,3 +1,11 @@
+locals {
+    tags = merge(var.tags,{
+        Terraform   = "true"
+        Environment = var.environment
+      }
+    )
+}
+
 # must select a region that supports availability zones
 # https://docs.microsoft.com/en-us/azure/availability-zones/az-overview
 variable "region" {
@@ -26,6 +34,11 @@ variable "environment" {
 
 variable "prefix" {
     default = "ktchntst"
+}
+
+variable "tags" {
+  type    = map(string)
+  default = {}
 }
 
 variable "application_count" {
@@ -84,7 +97,8 @@ variable onboard_log {
 }
 
 variable "nameserver" {
-  default = "8.8.8.8"
+  default = ["8.8.8.8"]
+  type = list(string)
 }
 variable internal_selfip_address {
   default = "10.30.0.10/24"
@@ -106,4 +120,9 @@ variable internal_vlan_name {
 }
 variable external_vlan_name {
   default = "1.1"
+}
+
+variable provision {
+  default = ["ltm"]
+  type    = list(string)
 }

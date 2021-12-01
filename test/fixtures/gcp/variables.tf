@@ -1,3 +1,17 @@
+locals {
+    tags = merge(var.tags,{
+        terraform   = "true"
+        environment = var.environment
+      }
+    )
+}
+
+variable environment {
+  type        = string
+  description = "name of the environment"
+  default     = "dev"
+}
+
 variable instance_count {
   description = "Number of Bigip instances to create( From terraform 0.13, module supports count feature to spin mutliple instances )"
   type        = number
@@ -33,7 +47,8 @@ variable service_account {
 }
 
 variable "nameserver" {
-  default = "8.8.8.8"
+  default = ["8.8.8.8"]
+  type    = list(string)
 }
 
 variable internal_selfip_address {
@@ -56,4 +71,13 @@ variable internal_vlan_name {
 }
 variable external_vlan_name {
   default = "1.0"
+}
+variable tags {
+  description = ""
+  default     = {}
+  type        = map(string)
+}
+variable provision {
+  default = ["ltm"]
+  type    = list(string)
 }

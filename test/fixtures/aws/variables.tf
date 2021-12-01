@@ -1,5 +1,22 @@
+locals {
+    tags = merge(var.tags,{
+        Terraform   = "true"
+        Environment = var.environment
+      }
+    )
+}
+
 variable "prefix" {
   default = "kitchen-terraform"
+}
+
+variable "environment" {
+  type    = string
+  default = "test"
+}
+variable "tags" {
+  type    = map(string)
+  default = {}
 }
 ## Europe Regions need oder Jumphost and BigIP Instance Typs1
 ## Uncomment needed region below
@@ -53,7 +70,8 @@ variable "ec2_key_file" {
 }
 
 variable "nameserver" {
-  default = "8.8.8.8"
+  default = ["8.8.8.8"]
+  type    = list(string)
 }
 variable do_version {
   default = "1.21.0"
@@ -91,4 +109,9 @@ variable internal_vlan_name {
 }
 variable external_vlan_name {
   default = "1.1"
+}
+
+variable provision {
+  default = ["ltm"]
+  type    = list(string)
 }

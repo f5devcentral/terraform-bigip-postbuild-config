@@ -12,12 +12,14 @@ module "vpc" {
   public_subnets = [for num in range(length(var.azs)) :
     cidrsubnet(var.cidr, 8, num + var.external_subnet_offset)
   ]
+  public_subnet_tags = merge(local.tags,{})
 
   # vpc private subnet used for internal 
   private_subnets = [
     for num in range(length(var.azs)) :
     cidrsubnet(var.cidr, 8, num + var.internal_subnet_offset)
   ]
+  private_subnet_tags = merge(local.tags,{})
 
   enable_nat_gateway = true
 
@@ -29,12 +31,12 @@ module "vpc" {
   create_database_subnet_group           = true
   create_database_subnet_route_table     = true
   create_database_internet_gateway_route = true
+  database_subnet_tags = merge(local.tags,{})
 
-  tags = {
-    Name        = format("%s-vpc-%s", var.prefix, random_id.id.hex)
-    Terraform   = "true"
-    Environment = "dev"
-  }
+  tags = merge(local.tags,{
+      Name = format("%s-vpc-%s", var.prefix, random_id.id.hex)
+    }
+  )
 }
 
 module "bigip_sg" {
@@ -58,6 +60,10 @@ module "bigip_sg" {
   # Allow ec2 instances outbound Internet connectivity
   egress_cidr_blocks = ["0.0.0.0/0"]
   egress_rules       = ["all-all"]
+  tags = merge(local.tags,{
+    Name = format("%s-bigipsg-%s", var.prefix, random_id.id.hex)
+    }
+  )
 }
 
 #
@@ -83,4 +89,8 @@ module "bigip_mgmt_sg" {
   # Allow ec2 instances outbound Internet connectivity
   egress_cidr_blocks = ["0.0.0.0/0"]
   egress_rules       = ["all-all"]
+  tags = merge(local.tags,{
+    Name = format("%s-bigipmgmtsg-%s", var.prefix, random_id.id.hex)
+    }
+  )
 }
