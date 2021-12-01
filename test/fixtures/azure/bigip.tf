@@ -1,6 +1,6 @@
 module bigip {
   count                      = 1
-  source                     = "git::git@github.com:f5devcentral/terraform-azure-bigip-module.git?ref=v0.9.6"
+  source                     = "git::git@github.com:F5Networks/terraform-azure-bigip-module.git?ref=v1.0.0"
   prefix                     = format("%s-bigip-%s",var.prefix,random_id.id.hex)
   f5_ssh_publickey           = file("~/.ssh/id_rsa.pub")
   resource_group_name        = azurerm_resource_group.main.name
@@ -10,6 +10,7 @@ module bigip {
   external_securitygroup_ids = [module.external-network-security-group.network_security_group_id]
   internal_subnet_ids        = [{ "subnet_id" = data.azurerm_subnet.internal.id, "public_ip" = false, "private_ip_primary" = "" }]
   internal_securitygroup_ids = [module.internal-network-security-group.network_security_group_id]
-  availabilityZones          = var.azs
+  availabilityZones          = [var.azs[0]]
+  tags                       = merge(local.tags,{})
 }
 
