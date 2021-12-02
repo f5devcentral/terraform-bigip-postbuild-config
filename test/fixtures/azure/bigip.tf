@@ -1,6 +1,6 @@
 module bigip {
   count                      = 1
-  source                     = "git::git@github.com:F5Networks/terraform-azure-bigip-module.git?ref=v1.0.0"
+  source                     = "git::git@github.com:mjmenger/terraform-azure-bigip-module-1.git"
   prefix                     = format("%s-bigip-%s",var.prefix,random_id.id.hex)
   f5_ssh_publickey           = file("~/.ssh/id_rsa.pub")
   resource_group_name        = azurerm_resource_group.main.name
