@@ -1,6 +1,8 @@
 module bigip {
   count               = var.instance_count
-  source              = "git::git@github.com:F5Networks/terraform-gcp-bigip-module.git?ref=v1.0.0"
+  #source             = "git::git@github.com:F5Networks/terraform-gcp-bigip-module.git?ref=v1.0.0"
+  source              = "F5Networks/bigip-module/gcp"
+  version             = "1.1.5"
   prefix              = format("%s-3nic", var.prefix)
   project_id          = var.project_id
   zone                = var.zone
