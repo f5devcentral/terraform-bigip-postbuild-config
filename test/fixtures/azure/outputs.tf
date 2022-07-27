@@ -28,15 +28,15 @@ output password {
 }
 
 output do_version {
-  value = "1.21.0"
+  value = "1.27.0"
 }
 
 output as3_version {
-  value = "3.28.0"
+  value = "3.34.0"
 }
 
 output ts_version {
-  value = "1.20.0"
+  value = "1.26.0"
 }
 
 output fast_version {
