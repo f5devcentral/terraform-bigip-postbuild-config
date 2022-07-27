@@ -20,6 +20,3 @@ jobs:
       uses: dwp/github-action-kitchen-terraform@0.14.7
       with:
         kitchen-command: "test aws"
-
-
-

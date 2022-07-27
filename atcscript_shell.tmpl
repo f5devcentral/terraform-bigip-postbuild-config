@@ -4,8 +4,8 @@ sleep ${initial_wait}
 response=0
 retries=0
 echo "checking ATC service availability..."
-# wait for the service to become available 
-# there may be some transient errors as the 
+# wait for the service to become available
+# there may be some transient errors as the
 # target service is installed and starts up
 while [ $response -ne 200 ] && [ $retries -lt ${retry_limit} ]
 do
@@ -13,7 +13,7 @@ do
         --write-out '%%{http_code}' \
         --silent \
         --output /dev/null \
-        https://${bigip_address}${bigip_atc_status_endpoint}) 
+        https://${bigip_address}${bigip_atc_status_endpoint})
     retries=$(($retries+1))
     echo "ATC endpoint for service status: $response"
     case $response in
@@ -25,7 +25,7 @@ do
         echo "ATC endpoint is available"
         response=200
         break
-        ;;        
+        ;;
     esac
     sleep ${poll_interval}
 done
@@ -40,7 +40,7 @@ response=0
 # scenarios have been encountered when processes
 # started by cloud-init are using the services
 # and haven't completed yet
-# it's better to wait for the previous request to 
+# it's better to wait for the previous request to
 # complete before submitting the next
 while [ $response -ne 200 ] && [ $retries -lt ${retry_limit} ]
 do
@@ -49,7 +49,7 @@ do
         --write-out '%%{http_code}' \
         --silent \
         --output /dev/null \
-        https://${bigip_address}${bigip_atc_endpoint}) 
+        https://${bigip_address}${bigip_atc_endpoint})
     retries=$(($retries+1))
     echo "ATC endpoint service availability: $response"
     case $response in
@@ -64,7 +64,7 @@ do
         echo "No content returned - assuming ATC service available for use"
         response=200
         break
-        ;;        
+        ;;
         422)
         echo "ATC service in failed state - likely from a previous run."
         response=200
@@ -77,7 +77,7 @@ do
         echo "unexpected ATC service availability"
         ;;
     esac
-done 
+done
 if [ $response -ne 200 ]; then
     echo "ERROR: ATC SERVICE IS UNAVAILABLE"
     exit 255

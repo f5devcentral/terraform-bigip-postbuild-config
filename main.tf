@@ -48,7 +48,7 @@ resource "null_resource" "bigip_atc_additional_file" {
   provisioner "file" {
     content     = var.additional_file_content
     destination = var.additional_file_destination
-  }  
+  }
   connection {
     type     = "ssh"
     user     = var.bigip_user

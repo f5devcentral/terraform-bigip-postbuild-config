@@ -7,7 +7,7 @@ For large-scale or dynamically-scaled BIG-IP deployments, the current [BIG-IP pr
 - Using Terraform to reconfigure BIG-IPs after initial build and onboarding when source-controlled operating parameters have changed
 
 # Prerequisites
-- Terraform host must be able to run a shell script 
+- Terraform host must be able to run a shell script
 - curl must be installed on the Terraform host
 - The Terraform host must be able to access the management endpoint of the BIG-IPs to configure
 
@@ -72,7 +72,7 @@ module "postbuild-config-do" {
 The module performs the following steps:
 
 1. Polls the target service until it's available
-2. Polls the target service until it's not in use  
+2. Polls the target service until it's not in use
 This step is to avoid first on-boarding race conditions
 3. Post the payload to the target service and evaluate the response
 4. Optionally, polls the target service for completion in case the initial response was "In Progress" (202)

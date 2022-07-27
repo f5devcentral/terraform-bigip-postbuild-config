@@ -11,7 +11,7 @@ MTU_SIZE                = input('mtu_size')
 EXTERNAL_VLAN_TAG       = input('external_vlan_tag')
 INTERNAL_VLAN_TAG       = input('internal_vlan_tag')
 
-# compare the following tests to the 
+# compare the following tests to the
 # declaration in assets/do.json
 
 control "bigip-postbuildconfig-do-self" do
@@ -23,7 +23,7 @@ control "bigip-postbuildconfig-do-self" do
               ssl_verify: false).body) do
         its('address') { should cmp EXTERNAL_SELFIP_ADDRESS }
         its('vlan') { should cmp "/Common/external" }
-        its('allowService') { should cmp "tcp:443"}   
+        its('allowService') { should cmp "tcp:443"}
     end
     describe json(content: http("https://#{BIGIP_HOST}:#{BIGIP_PORT}/mgmt/tm/net/self/internal-self",
         auth: {user: BIGIP_USER, pass: BIGIP_PASSWORD},

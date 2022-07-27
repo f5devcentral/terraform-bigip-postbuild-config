@@ -96,7 +96,7 @@ variable external_selfip_address {
   default = "10.20.0.9/24"
 }
 variable mtu_size {
-  default = 1500 
+  default = 1500
 }
 variable internal_vlan_tag {
   default = "20"

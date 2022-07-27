@@ -11,4 +11,4 @@ Gemfile.lock
 
 .env
 *.http
-
+.pre-commit-config.yaml

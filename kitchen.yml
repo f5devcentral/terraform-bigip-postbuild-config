@@ -21,7 +21,7 @@ verifier:
         - bigip-postbuildconfig-do-dns
         - bigip-postbuildconfig-do-vlan
         - bigip-postbuildconfig-do-provision
-        - bigip-connectivity        
+        - bigip-connectivity
         - bigip-declarative-onboarding
         - bigip-declarative-onboarding-version
         - bigip-application-services
@@ -32,7 +32,7 @@ verifier:
 
 platforms:
   - name: aws
-    
+
     driver:
       root_module_directory: test/fixtures/aws
       variable_files:

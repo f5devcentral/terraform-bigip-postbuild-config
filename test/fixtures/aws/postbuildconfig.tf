@@ -4,7 +4,7 @@ module "postbuild-config-do" {
   bigip_password   = random_string.password.result
   bigip_address    = module.bigip[0].mgmtPublicIP
   bigip_do_payload = templatefile("${path.module}/../../assets/do.json",
-  { 
+  {
     nameserver              = var.nameserver
     internal_selfip_address = var.internal_selfip_address
     external_selfip_address = var.external_selfip_address

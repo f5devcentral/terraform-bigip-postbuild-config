@@ -1,7 +1,7 @@
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
     features{}
-    
+
 }
 
 data "azurerm_client_config" "current" {}
@@ -9,7 +9,7 @@ data "azurerm_client_config" "current" {}
 terraform {
     required_providers {
       azurerm = {
-        version = "> 2.28" 
+        version = "> 2.28"
       }
     }
 }
@@ -43,7 +43,7 @@ resource "azurerm_network_security_group" "securitygroup" {
     name                = format("%s-securitygroup-%s",var.prefix,random_id.id.hex)
     location            = var.region
     resource_group_name = azurerm_resource_group.main.name
-    
+
     security_rule {
         name                       = "SSH"
         priority                   = 1001
@@ -67,6 +67,6 @@ resource "random_id" "id" {
     #     # Generate a new ID only when a new resource group is defined
     #     resource_group = azurerm_resource_group.resourcegroup.name
     # }
-    
+
     byte_length = 2
 }

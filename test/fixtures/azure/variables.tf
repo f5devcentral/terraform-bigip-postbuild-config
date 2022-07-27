@@ -70,14 +70,14 @@ variable DO_URL {
     type        = string
     default     = "https://github.com/F5Networks/f5-declarative-onboarding/releases/download/v1.21.0/f5-declarative-onboarding-1.21.0-3.noarch.rpm"
 }
-## Please check and update the latest AS3 URL from https://github.com/F5Networks/f5-appsvcs-extension/releases/latest 
+## Please check and update the latest AS3 URL from https://github.com/F5Networks/f5-appsvcs-extension/releases/latest
 # always point to a specific version in order to avoid inadvertent configuration inconsistency
 variable AS3_URL {
     description = "URL to download the BIG-IP Application Service Extension 3 (AS3) module"
     type        = string
     default     = "https://github.com/F5Networks/f5-appsvcs-extension/releases/download/v3.28.0/f5-appsvcs-3.28.0-3.noarch.rpm"
 }
-## Please check and update the latest TS URL from https://github.com/F5Networks/f5-telemetry-streaming/releases/latest 
+## Please check and update the latest TS URL from https://github.com/F5Networks/f5-telemetry-streaming/releases/latest
 # always point to a specific version in order to avoid inadvertent configuration inconsistency
 variable TS_URL {
     description = "URL to download the BIG-IP Telemetry Streaming Extension (TS) module"
@@ -107,7 +107,7 @@ variable external_selfip_address {
   default = "10.20.0.9/24"
 }
 variable mtu_size {
-  default = 1500 
+  default = 1500
 }
 variable internal_vlan_tag {
   default = "20"

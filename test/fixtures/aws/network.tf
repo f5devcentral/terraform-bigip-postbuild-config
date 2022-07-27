@@ -14,7 +14,7 @@ module "vpc" {
   ]
   public_subnet_tags = merge(local.tags,{})
 
-  # vpc private subnet used for internal 
+  # vpc private subnet used for internal
   private_subnets = [
     for num in range(length(var.azs)) :
     cidrsubnet(var.cidr, 8, num + var.internal_subnet_offset)

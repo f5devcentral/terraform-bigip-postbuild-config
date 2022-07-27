@@ -14,4 +14,3 @@ module bigip {
   availabilityZones          = [var.azs[0]]
   tags                       = merge(local.tags,{})
 }
-

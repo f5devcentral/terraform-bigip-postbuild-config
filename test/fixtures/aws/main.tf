@@ -16,5 +16,3 @@ resource "random_string" "password" {
   special          = true
   override_special = "_%@"
 }
-
-
