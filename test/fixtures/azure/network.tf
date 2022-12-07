@@ -5,6 +5,7 @@
 
 module "network" {
   source              = "Azure/vnet/azurerm"
+  version             = "2.7.0"
   vnet_name           = format("%s-vnet-%s", var.prefix, random_id.id.hex)
   resource_group_name = azurerm_resource_group.main.name
   address_space       = [var.cidr]

@@ -1,7 +1,7 @@
 module bigip {
   count                      = 1
   source                     = "F5Networks/bigip-module/azure"
-  version                    = "1.2.2"
+  version                    = "1.2.5"
   prefix                     = format("%s-bigip-%s",var.prefix,random_id.id.hex)
   f5_ssh_publickey           = file("~/.ssh/id_rsa.pub")
   resource_group_name        = azurerm_resource_group.main.name
