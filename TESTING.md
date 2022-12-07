@@ -15,6 +15,9 @@ tested using
 - create ```aws.tfvars``` from [aws.tfvars.example](test/assets/aws.tfvars.example)
 - create ```azure.tfvars``` from [azure.tfvars.example](test/assets/aws.tfvars.example)
 
+### Note
+You should make certain that the ip address of your Terraform host is allowed to access the management API endpoint of the BIG-IP
+
 ## First time through
 You should be good to go now.
 
