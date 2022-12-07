@@ -1,6 +1,6 @@
 module "bigip" {
   source                     = "F5Networks/bigip-module/aws"
-  version                    = "1.1.5"
+  version                    = "1.1.8"
   count                      = 1
   prefix                     = format("%s-3nic", var.prefix)
   f5_ami_search_name         = "F5 BIGIP-15.* PAYG-Best 200Mbps*"

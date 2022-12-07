@@ -74,15 +74,15 @@ variable "nameserver" {
   type    = list(string)
 }
 variable do_version {
-  default = "1.27.0"
+  default = "1.33.0"
 }
 
 variable as3_version {
-  default = "3.34.0"
+  default = "3.40.0"
 }
 
 variable ts_version {
-  default = "1.26.0"
+  default = "1.32.0"
 }
 
 variable fast_version {
